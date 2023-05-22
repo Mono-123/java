@@ -44,25 +44,23 @@ public class Main {
             System.out.println("print id = 9999");
             printById(studentMapper, 9999);
 
-            long id_new = studentMapper.insert(new Student("Alex", 0, 0, 0));
+            Student newStudent = new Student("Bob", 0, 0, 0);
+            studentMapper.insert(newStudent);
             session.commit();
-            System.out.println("print after insert: " + id_new);
-
-
-            long id = 9;
-            Student student = studentMapper.getById(id);
+            System.out.println("print after insert: " + newStudent.getId());
+            Student student = studentMapper.getById(newStudent.getId());
             System.out.println(student);
             student.setScore(student.getScore() + 10);
             System.out.println("add 10 for student: ");
             System.out.println(student);
             studentMapper.updateScore(student);
             session.commit();
-            System.out.println("print after update: " + id);
-            printById(studentMapper, id);
-            studentMapper.deleteById(id);
+            System.out.println("print after update: " + newStudent.getId());
+            printById(studentMapper, newStudent.getId());
+            studentMapper.deleteById(newStudent.getId());
             session.commit();
-            System.out.println("print after delete: " + id);
-            printById(studentMapper, id);
+            System.out.println("print after delete: " + newStudent.getId());
+            printById(studentMapper, newStudent.getId());
             
             session.close();
         } catch (Exception e) {

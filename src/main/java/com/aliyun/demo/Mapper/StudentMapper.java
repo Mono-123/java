@@ -20,7 +20,7 @@ public interface StudentMapper {
 
     @Insert("INSERT INTO students (name, gender, grade, score) VALUES (#{stu.name}, #{stu.gender}, #{stu.grade}, #{stu.score})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    long insert(@Param("stu") Student student);
+    void insert(@Param("stu") Student student);
 
     @Update("UPDATE students SET score = #{stu.score} WHERE id = #{stu.id}")
     void updateScore(@Param("stu") Student student);
