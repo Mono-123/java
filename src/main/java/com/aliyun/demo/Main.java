@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.aliyun.demo.Entity.Student;
+import com.aliyun.demo.Entity.score;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,15 +33,17 @@ public class Main {
                 Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
 
                 // printByName(conn, "明%\" AND gender = 0 OR name Like \"%");
-                // printByName2(conn, "%明%");
-                // printByName2(conn, "%明% OR name Like %%");
+                 printByName2(conn, "%明%");
                 // add(conn, "Tom", 1, 1, 100);
                 // Student student = new Student();
                 // student.setName("Jerry");
                 // student.setGender(1);
                 // student.setGrade(1);
                 // student.setScore(99);
-                // add(conn, new Student("Jane", 1, 2, 98));
+                //add(conn, new Student("Jane", 1, 2, 98));
+
+                
+                //add2(conn, new score("amy", 2, 3, 98, 74, 67));
                 // 关闭连接:
                 conn.close();
             } catch (Exception e) {
@@ -148,4 +151,52 @@ public class Main {
             e.printStackTrace();
         }
     }
+
+
+    public static void add2(Connection conn, score score) {
+        try {
+            System.out.println("insert: " + score.toString());
+
+            String sql = "INSERT INTO score (name, grade, classes, Chinese, Math, English) VALUES (?,?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setObject(1, score.getName());
+            ps.setObject(2, score.getGrade());
+            ps.setObject(3, score.getClasses());
+            ps.setObject(4, score.getChinese());
+            ps.setObject(5, score.getMath());
+            ps.setObject(6, score.getEnglish());
+            int rows = ps.executeUpdate();
+
+            System.out.println("inserted: " + rows);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+ public static void printByName3(Connection conn, String name) {
+        try {
+            System.out.println("print name like: " + name);
+
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT id, name, classes,grade,Chinese,Math,English FROM score WHERE name LIKE \"%" + name + "%\"";
+            System.out.println("执行了这个SQL: "+ sql);
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                long id = rs.getLong(1);// 注意：索引从1开始
+                String nameResult = rs.getString(2); 
+                long grade = rs.getLong(3);
+                int classes = rs.getInt(4);
+                int Chinese = rs.getInt(5);
+                int Math = rs.getInt(6);
+                int English = rs.getInt(7);
+                System.out.println(id  + nameResult + grade + "," + classes + "," + Chinese +  "," +Math + "," +English );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+
+
