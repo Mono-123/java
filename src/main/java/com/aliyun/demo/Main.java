@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import com.aliyun.demo.Entity.Student;
 import com.aliyun.demo.Mapper.StudentMapper;
+import com.aliyun.demo.Util.Pagination;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,11 +34,12 @@ public class Main {
                     Main.class.getClassLoader().getResourceAsStream("mybatis-config.xml"));
             SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader, properties);
 
-            factory.getConfiguration().addMapper(StudentMapper.class);
             SqlSession session = factory.openSession();
             StudentMapper studentMapper = session.getMapper(StudentMapper.class);
 
-            System.out.println("printall");
+            System.out.println("printAllByPagination");
+            printAllByPagination(studentMapper);
+            System.out.println("printAll");
             printAll(studentMapper);
             System.out.println("print id = 4");
             printById(studentMapper, 4);
@@ -64,8 +66,15 @@ public class Main {
             
             session.close();
         } catch (Exception e) {
-            System.out.println("读取配置文件失败");
+            System.out.println("执行发生错误");
             e.printStackTrace();
+        }
+    }
+
+    public static void printAllByPagination(StudentMapper studentMapper) {
+        List<Student> students = studentMapper.getAllByPagination(new Pagination(10, 0));
+        for (Student stu : students) {
+            System.out.println(stu);
         }
     }
 

@@ -15,7 +15,7 @@
 		</environment>
 	</environments>
 
-	<!-- <mappers>
-		<mapper resource="" />
-	</mappers> -->
+	<mappers>
+		<mapper resource="mappers/student-mapper.xml" />
+	</mappers>
 </configuration>
