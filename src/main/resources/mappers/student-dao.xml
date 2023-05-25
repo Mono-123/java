@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aliyun.learnjava.dao.StudentDao">
+    <select id="getById" parameterType="long" resultType="com.aliyun.learnjava.entity.Student">
+        SELECT * FROM students WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultType="com.aliyun.learnjava.entity.Student">
+        SELECT * FROM students LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <insert
+        id="insert"
+        parameterType="com.aliyun.learnjava.entity.Student"
+        useGeneratedKeys="true"
+        keyProperty="id"
+    >
+        INSERT INTO students (name, gender, grade, score) VALUES (#{stu.name}, #{stu.gender}, #{stu.grade}, #{stu.score})
+    </insert>
+
+    <update
+        id="updateScore"
+        parameterType="com.aliyun.learnjava.entity.Student"
+    >
+        UPDATE students SET score = #{stu.score} WHERE id = #{stu.id}
+    </update>
+
+    <delete
+        id="deleteById"
+        parameterType="long"
+    >
+       DELETE FROM students WHERE id = #{id}
+    </delete>
+
+</mapper>
