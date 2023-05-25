@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aliyun.demo.Mapper.TeacherMapper">
+    <select id="getTeacher" parameterType="long" resultType="com.aliyun.demo.Entity.Teacher">
+        SELECT * FROM teacher WHERE id = #{id}
+    </select>
+
+    <select id="getTeacherPagination" resultType="com.aliyun.demo.Entity.Teacher">
+        SELECT * FROM teacher LIMIT #{limit} OFFSET #{offset}
+    </select>
+    
+    <insert
+        id="insertTeacher"
+        parameterType="com.aliyun.demo.Entity.Teacher"
+        useGeneratedKeys="true"
+        keyProperty="id"
+    >
+        INSERT INTO teacher (name,  gender) VALUES (#{Teacher.name}, #{Teacher.gender})
+    </insert>
+
+    <update
+        id="updateTeacher"
+        parameterType="com.aliyun.demo.Entity.Teacher"
+    >
+       UPDATE teacher SET name = #{Teacher.name} WHERE id = #{Teacher.id}
+    </update>
+
+    <delete
+        id="deleteTeacher"
+        parameterType="long"
+    >
+       DELETE FROM teacher WHERE id = #{id}
+    </delete>
+
+</mapper>

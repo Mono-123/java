@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aliyun.demo.Mapper.ScoreMapper">
+    <select id="getScore" parameterType="long" resultType="com.aliyun.demo.Entity.Score">
+        SELECT * FROM score WHERE id = #{id}
+    </select>
+
+    <select id="getScorePagination" resultType="com.aliyun.demo.Entity.Score">
+        SELECT * FROM score LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <insert
+        id="insertScore"
+        parameterType="com.aliyun.demo.Entity.Score"
+        useGeneratedKeys="true"
+        keyProperty="id"
+    >
+        INSERT INTO score (student_id,chinese,math,english) VALUES (#{Score.student_id}, #{Score.chinese},#{Score.math},#{Score.english})
+    </insert>
+
+    <update
+        id="updateChinese"
+        parameterType="com.aliyun.demo.Entity.Score"
+    >
+       UPDATE score SET chinese = #{Score.chinese} WHERE id = #{Score.id}
+    </update>
+
+    <delete
+        id="deleteScore"
+        parameterType="long"
+    >
+       DELETE FROM score WHERE id = #{id}
+    </delete>
+
+</mapper>

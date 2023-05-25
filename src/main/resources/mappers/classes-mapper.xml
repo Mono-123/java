@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aliyun.demo.Mapper.ClassesMapper">
+    <select id="getClasses" parameterType="long" resultType="com.aliyun.demo.Entity.Classes">
+        SELECT * FROM classes WHERE id = #{id}
+    </select>
+
+    <select id="getClassesPagination" resultType="com.aliyun.demo.Entity.Classes">
+        SELECT * FROM classes LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <insert
+        id="insertClasses"
+        parameterType="com.aliyun.demo.Entity.Classes"
+        useGeneratedKeys="true"
+        keyProperty="id"
+    >
+        INSERT INTO classes (name, manager_id, grade_id) VALUES (#{classes.name}, #{classes.manager_id}, #{classes.grade_id})
+    </insert>
+
+    <update
+        id="updateClassesManager"
+        parameterType="com.aliyun.demo.Entity.Classes"
+    >
+        UPDATE classes SET manager_id = #{classes.manager_id} WHERE id = #{classes.id}
+    </update>
+
+    <update
+        id="updateGrade"
+        parameterType="com.aliyun.demo.Entity.Classes"
+    >
+        UPDATE classes SET grade_id = #{classes.grade_id}
+    </update>
+
+    <delete
+        id="deleteClasses"
+        parameterType="long"
+    >
+       DELETE FROM classes WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -17,5 +17,7 @@
 
 	<mappers>
 		<mapper resource="mappers/student-mapper.xml" />
+		<mapper resource="mappers/score-mapper.xml" />
+		<mapper resource="mappers/grade-mapper.xml" />
 	</mappers>
 </configuration>
