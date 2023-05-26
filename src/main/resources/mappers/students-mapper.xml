@@ -16,7 +16,7 @@
         useGeneratedKeys="true"
         keyProperty="id"
     >
-        INSERT INTO student (name, gender, class_id) VALUES (#{student.name}, #{student.gender}, #{student.class_id})
+        INSERT INTO student (name, gender, class_id) VALUES (#{student.name}, #{student.gender}, #{student.classId})
     </insert>
 
     <update

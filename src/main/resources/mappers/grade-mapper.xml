@@ -16,7 +16,7 @@
         useGeneratedKeys="true"
         keyProperty="id"
     >
-        INSERT INTO grade (grade, manager_id, is_graduated) VALUES (#{Grade.grade}, #{Grade.manager_id}, #{Grade.is_graduated})
+        INSERT INTO grade (grade, manager_id, is_graduated) VALUES (#{Grade.grade}, #{Grade.managerId}, #{Grade.isGraduated})
     </insert>
 
     <update

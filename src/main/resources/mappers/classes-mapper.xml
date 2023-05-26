@@ -16,21 +16,21 @@
         useGeneratedKeys="true"
         keyProperty="id"
     >
-        INSERT INTO classes (name, manager_id, grade_id) VALUES (#{classes.name}, #{classes.manager_id}, #{classes.grade_id})
+        INSERT INTO classes (name, manager_id, grade_id) VALUES (#{classes.name}, #{classes.managerId}, #{classes.gradeId})
     </insert>
 
     <update
         id="updateClassesManager"
         parameterType="com.aliyun.demo.Entity.Classes"
     >
-        UPDATE classes SET manager_id = #{classes.manager_id} WHERE id = #{classes.id}
+        UPDATE classes SET manager_id = #{classes.managerId} WHERE id = #{classes.id}
     </update>
 
     <update
         id="updateGrade"
         parameterType="com.aliyun.demo.Entity.Classes"
     >
-        UPDATE classes SET grade_id = #{classes.grade_id}
+        UPDATE classes SET grade_id = #{classes.gradeId}
     </update>
 
     <delete
