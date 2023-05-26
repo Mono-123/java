@@ -72,6 +72,7 @@ public class Main3 {
             System.out.println("print after delete: " + newGrade.getId());
             printById(GradeMapper, newGrade.getId());
 
+            scan.close();
             session.close();
         } catch (Exception e) {
             System.out.println("读取配置文件失败");
