@@ -2,6 +2,7 @@ package com.aliyun.demo;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,13 +37,14 @@ public class Main3 {
             SqlSession session = factory.openSession();
             GradeMapper GradeMapper = session.getMapper(GradeMapper.class);
 
-//查询
+//输入所需的分页情况查询
             System.out.println("printtop");
             printtop (GradeMapper);
-            System.out.println("print id = 2");
-            printById(GradeMapper, 4);
-            System.out.println("print id = 9999");
-            printById(GradeMapper, 9999);
+//输入学生id查询2
+            Scanner scan = new Scanner(System.in);
+            System.out.println("请输入需要查询的学生id：");
+            int id = scan.nextInt();
+            printById(GradeMapper, id);
 //插入
             Grade newGrade = new Grade(4, 1, 0);
             GradeMapper.insertGrade(newGrade);
@@ -78,7 +80,13 @@ public class Main3 {
     }
 
     public static void printtop(GradeMapper GradeMapper) {
-        List<Grade> Grades = GradeMapper.getGradePagination(10, 0);
+        Scanner scan = new Scanner(System.in);
+        System.out.println("请输入需要查询的分页情况：");
+        int a = scan.nextInt();
+        System.out.println("请输入需要查询第几页：");
+        int b = scan.nextInt();
+        b=(b-1)*a;
+        List<Grade> Grades = GradeMapper.getGradePagination(a, b);
         for (Grade score : Grades) {
             System.out.println(score);
         }

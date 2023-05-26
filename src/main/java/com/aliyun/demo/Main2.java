@@ -2,6 +2,7 @@ package com.aliyun.demo;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,13 +37,15 @@ public class Main2 {
             SqlSession session = factory.openSession();
             ScoreMapper ScoreMapper = session.getMapper(ScoreMapper.class);
 
-//查询
+//输入分页查询
             System.out.println("printtop");
             printtop (ScoreMapper);
-            System.out.println("print id = 2");
-            printById(ScoreMapper, 2);
-            System.out.println("print id = 99");
-            printById(ScoreMapper, 99);
+//输入id查询
+            Scanner scan = new Scanner(System.in);
+            System.out.println("请输入需要查询的学生id：");
+            int id = scan.nextInt();
+            printById(ScoreMapper, id);
+
 //插入
             Score newScore = new Score(4, 72, 68, 96);
             ScoreMapper.insertScore(newScore);
@@ -74,7 +77,13 @@ public class Main2 {
     }
 
     public static void printtop(ScoreMapper ScoreMapper) {
-        List<Score> Scores = ScoreMapper.getScorePagination(10, 0);
+        Scanner scan = new Scanner(System.in);
+        System.out.println("请输入需要查询的分页情况：");
+        int a = scan.nextInt();
+        System.out.println("请输入需要查询第几页：");
+        int b = scan.nextInt();
+        b=(b-1)*a;
+        List<Score> Scores = ScoreMapper.getScorePagination(a, b);
         for (Score score : Scores) {
             System.out.println(score);
         }
