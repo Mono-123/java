@@ -15,7 +15,7 @@ public interface ClassesMapper {
 
     void updateClassesManager(@Param("classes") Classes Classes);
 
-    void updateGrade(@Param("classes") int is_grade);
+    void updateGrade(@Param("classes") int isGrade);
 
     void deleteClasses(@Param("id") long id);
 }
