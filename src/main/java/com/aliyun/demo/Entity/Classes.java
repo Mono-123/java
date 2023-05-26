@@ -3,8 +3,8 @@ package com.aliyun.demo.Entity;
 public class Classes {
     private long id;
     private String name;
-    private int manager_id;
-    private int grade_id;
+    private int managerId;
+    private int gradeId;
 
     public void setId(long id) {
         this.id = id;
@@ -22,28 +22,28 @@ public class Classes {
         return this.name;
     }
 
-    public void setmanager_id(int manager_id) {
-        this.manager_id = manager_id;
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
     }
 
-    public int getmanager_id() {
-        return this.manager_id;
+    public int getManagerId() {
+        return this.managerId;
     }
 
-    public void setGrade_id(int grade_id) {
-        this.grade_id = grade_id;
+    public void setGradeId(int gradeId) {
+        this.gradeId = gradeId;
     }
 
-    public int getGrade_id() {
-        return this.grade_id;
+    public int getGradeId() {
+        return this.gradeId;
     }
 
     public Classes() {}
 
-    public Classes(String name, int manager_id, int grade_id , int score) {
+    public Classes(String name, int managerId, int gradeId , int score) {
         this.name = name;
-        this.manager_id = manager_id;
-        this.grade_id = grade_id;
+        this.managerId = managerId;
+        this.gradeId = gradeId;
     
     }
 
@@ -54,9 +54,9 @@ public class Classes {
         sb.append(", ");
         sb.append("name: " + this.name);
         sb.append(", ");
-        sb.append("manager_id: " + this.manager_id);
+        sb.append("managerId: " + this.managerId);
         sb.append(", ");
-        sb.append("grade_id: " + this.grade_id);
+        sb.append("gradeId: " + this.gradeId);
         return sb.toString();
     }
 }

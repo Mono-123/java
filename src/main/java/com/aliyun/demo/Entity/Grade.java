@@ -3,8 +3,8 @@ package com.aliyun.demo.Entity;
 public class Grade {
     private long id;
     private int grade;
-    private int manager_id;
-    private int is_graduated;
+    private int managerId;
+    private int isGraduated;
 
     public void setId(long id) {
         this.id = id;
@@ -22,28 +22,28 @@ public class Grade {
         return this.grade;
     }
 
-    public void setmanager_id(int manager_id) {
-        this.manager_id = manager_id;
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
     }
 
-    public int getmanager_id() {
-        return this.manager_id;
+    public int getManagerId() {
+        return this.managerId;
     }
 
-    public void setis_graduated(int is_graduated) {
-        this.is_graduated = is_graduated;
+    public void setisGraduated(int isGraduated) {
+        this.isGraduated = isGraduated;
     }
 
-    public int getis_graduated() {
-        return this.is_graduated;
+    public int getisGraduated() {
+        return this.isGraduated;
     }
 
     public Grade() {}
 
-    public Grade(int grade, int manager_id, int is_graduated) {
+    public Grade(int grade, int managerId, int isGraduated) {
         this.grade = grade;
-        this.manager_id = manager_id;
-        this.is_graduated = is_graduated;
+        this.managerId = managerId;
+        this.isGraduated = isGraduated;
     
     }
 
@@ -54,9 +54,9 @@ public class Grade {
         sb.append(", ");
         sb.append("grade: " + this.grade);
         sb.append(", ");
-        sb.append("manager_id: " + this.manager_id);
+        sb.append("managerId: " + this.managerId);
         sb.append(", ");
-        sb.append("is_graduated: " + this.is_graduated);
+        sb.append("isGraduated: " + this.isGraduated);
         return sb.toString();
     }
 

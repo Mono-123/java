@@ -2,7 +2,7 @@ package com.aliyun.demo.Entity;
 
 public class Score {
     private long id;
-    private long student_id;
+    private long studentId;
     private int chinese;
     private int math;
     private int english;
@@ -15,12 +15,12 @@ public class Score {
         return this.id;
     }
 
-    public void setstudent_id(long student_id) {
-        this.student_id = student_id;
+    public void setstudentId(long studentId) {
+        this.studentId = studentId;
     }
 
-    public long getstudent_id() {
-        return this.student_id;
+    public long getstudentId() {
+        return this.studentId;
     }
 
     public void setchinese(int chinese) {
@@ -49,8 +49,8 @@ public class Score {
 
     public Score() {}
 
-    public Score(long student_id, int chinese, int grade , int english) {
-        this.student_id = student_id;
+    public Score(long studentId, int chinese, int grade , int english) {
+        this.studentId = studentId;
         this.chinese = chinese;
         this.math = grade;
         this.english = english;
@@ -61,7 +61,7 @@ public class Score {
         StringBuilder sb = new StringBuilder();
         sb.append("id: " + this.id);
         sb.append(", ");
-        sb.append("student_id: " + this.student_id);
+        sb.append("studentId: " + this.studentId);
         sb.append(", ");
         sb.append("chinese: " + this.chinese);
         sb.append(", ");
