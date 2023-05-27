@@ -7,14 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import com.aliyun.learnjava.entity.Score;
 
 public interface ScoreDao {
-    
-Score getScore(@Param("id") long id);
 
-List<Score> getScorePagination(@Param("limit") int limit, @Param("offset") int offset);
+    Score getScore(@Param("id") long id);
 
-void insertScore(@Param("Score") Score Score);
+    List<Score> getScorePagination(@Param("limit") int limit, @Param("offset") int offset);
 
-void updateChinese(@Param("Score") Score Score);
+    void insertScore(@Param("Score") Score Score);
 
-void deleteScore(@Param("id") long id);
-} 
+    void updateChinese(@Param("Score") Score Score);
+
+    void deleteScore(@Param("id") long id);
+}

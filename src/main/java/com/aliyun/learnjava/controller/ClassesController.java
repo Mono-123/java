@@ -12,20 +12,20 @@ import com.aliyun.learnjava.service.ClassesService;
 import com.aliyun.learnjava.entity.Classes;
 
 @RestController()
-@RequestMapping("Classes")
+@RequestMapping("classes")
 public class ClassesController {
     @Autowired
-    private ClassesService ClassesService;
+    private ClassesService classesService;
 
     @GetMapping("/list")
     public List<Classes> getClassesPagination() {
-        List<Classes> Classes = this.ClassesService.getClassesPagination(10, 0);
-        return Classes;
+        List<Classes> classes = this.classesService.getClassesPagination(10, 0);
+        return classes;
     }
 
     @GetMapping("/{id}")
     public Classes getClasses(@PathVariable("id") long id) {
-        Classes Classes = this.ClassesService.getClasses(id);
-        return Classes;
+        Classes classes = this.classesService.getClasses(id);
+        return classes;
     }
 }

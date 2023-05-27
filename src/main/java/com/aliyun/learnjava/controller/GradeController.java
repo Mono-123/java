@@ -12,20 +12,20 @@ import com.aliyun.learnjava.service.GradeService;
 import com.aliyun.learnjava.entity.Grade;
 
 @RestController()
-@RequestMapping("Grade")
+@RequestMapping("grade")
 public class GradeController {
     @Autowired
-    private GradeService GradeService;
+    private GradeService gradeService;
 
     @GetMapping("/list")
     public List<Grade> getGradePagination() {
-        List<Grade> Grade = this.GradeService.getGradePagination(10, 0);
-        return Grade;
+        List<Grade> grade = this.gradeService.getGradePagination(10, 0);
+        return grade;
     }
 
     @GetMapping("/{id}")
     public Grade getGrade(@PathVariable("id") long id) {
-        Grade Grade = this.GradeService.getGrade(id);
-        return Grade;
+        Grade grade = this.gradeService.getGrade(id);
+        return grade;
     }
 }

@@ -12,20 +12,20 @@ import com.aliyun.learnjava.service.ScoreService;
 import com.aliyun.learnjava.entity.Score;
 
 @RestController()
-@RequestMapping("Score")
+@RequestMapping("score")
 public class ScoreController {
     @Autowired
-    private ScoreService ScoreService;
+    private ScoreService scoreService;
 
     @GetMapping("/list")
     public List<Score> getScorePagination() {
-        List<Score> Score = this.ScoreService.getScorePagination(10, 0);
-        return Score;
+        List<Score> score = this.scoreService.getScorePagination(10, 0);
+        return score;
     }
 
     @GetMapping("/{id}")
     public Score getScore(@PathVariable("id") long id) {
-        Score Score = this.ScoreService.getScore(id);
-        return Score;
+        Score score = this.scoreService.getScore(id);
+        return score;
     }
 }
