@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aliyun.learnjava.dao.StudentsDao">
+    <select id="getStudent" parameterType="long" resultType="com.aliyun.learnjava.entity.Students">
+        SELECT * FROM student WHERE id = #{id}
+    </select>
+
+    <select id="getStudentPagination" resultType="com.aliyun.learnjava.entity.Students">
+        SELECT * FROM student LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <insert
+        id="insertStudent"
+        parameterType="com.aliyun.learnjava.entity.Students"
+        useGeneratedKeys="true"
+        keyProperty="id"
+    >
+        INSERT INTO student (name, gender, class_id) VALUES (#{student.name}, #{student.gender}, #{student.classId})
+    </insert>
+
+    <update
+        id="updateClassId"
+        parameterType="com.aliyun.learnjava.entity.Students"
+    >
+       UPDATE student SET class_id = #{student.class_id} WHERE id = #{student.id}
+    </update>
+
+    <delete
+        id="deleteStudent"
+        parameterType="long"
+    >
+       DELETE FROM student WHERE id = #{id}
+    </delete>
+
+</mapper>
