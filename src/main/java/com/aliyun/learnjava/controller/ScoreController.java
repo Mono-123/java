@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aliyun.learnjava.service.GradeService;
-import com.aliyun.learnjava.entity.Grade;
+import com.aliyun.learnjava.service.ScoreService;
+import com.aliyun.learnjava.entity.Score;
 
 @RestController()
-@RequestMapping("Grade")
-public class GradeController {
+@RequestMapping("Score")
+public class ScoreController {
     @Autowired
-    private GradeService GradeService;
+    private ScoreService ScoreService;
 
     @GetMapping("/list")
-    public List<Grade> getGradePagination() {
-        List<Grade> Grade = this.GradeService.getGradePagination(10, 0);
-        return Grade;
+    public List<Score> getScorePagination() {
+        List<Score> Score = this.ScoreService.getScorePagination(10, 0);
+        return Score;
     }
 
     @GetMapping("/{id}")
-    public Grade getGrade(@PathVariable("id") long id) {
-        Grade Grade = this.GradeService.getGrade(id);
-        return Grade;
+    public Score getScore(@PathVariable("id") long id) {
+        Score Score = this.ScoreService.getScore(id);
+        return Score;
     }
 }
