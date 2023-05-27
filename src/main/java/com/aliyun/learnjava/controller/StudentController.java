@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aliyun.learnjava.service.StudentService;
@@ -18,8 +19,11 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/list")
-    public List<Student> getAll() {
-        List<Student> students = this.studentService.getAll(10, 0);
+    public List<Student> getAll(
+        @RequestParam(name = "limit") int limit,
+        @RequestParam(name = "offset") int offset
+    ) {
+        List<Student> students = this.studentService.getAll(limit, offset);
         return students;
     }
 
