@@ -20,4 +20,27 @@ public class StudentService {
     public List<Student> getAll(int limit, int offset) {
         return this.studentDao.getAll(limit, offset);
     }
+
+    public Student inserStudent(
+        String name,
+        int gender,
+        int grade,
+        int score
+    ) {
+        Student stu = new Student();
+        stu.setName(name);
+        stu.setGender(gender);
+        stu.setGrade(grade);
+        stu.setScore(score);
+        this.studentDao.insert(stu);
+        return stu;
+    }
+
+    public Student inserStudent(Student student) {
+        if (student.getName() == null || student.getName().isEmpty()) {
+            student.setName("unamed");
+        }
+        this.studentDao.insert(student);
+        return student;
+    }
 }
