@@ -43,4 +43,9 @@ public class StudentService {
         this.studentDao.insert(student);
         return student;
     }
+
+    public Student updateStudent(Student student) {
+        this.studentDao.updateById(student);
+        return this.studentDao.getById(student.getId());
+    }
 }

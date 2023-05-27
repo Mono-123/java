@@ -12,7 +12,7 @@ public interface StudentDao {
 
     void insert(@Param("stu") Student student);
 
-    void updateScore(@Param("stu")Student student);
+    void updateById(@Param("stu")Student student);
 
     void deleteById(@Param("id") long id);
 }   

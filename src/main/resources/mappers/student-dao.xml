@@ -20,10 +20,10 @@
     </insert>
 
     <update
-        id="updateScore"
+        id="updateById"
         parameterType="com.aliyun.learnjava.entity.Student"
     >
-        UPDATE students SET score = #{stu.score} WHERE id = #{stu.id}
+        UPDATE students SET name = #{stu.name}, gender = #{stu.gender}, grade = #{stu.grade}, score = #{stu.score} WHERE id = #{stu.id}
     </update>
 
     <delete
