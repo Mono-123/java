@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aliyun.exception.NotFoundException;
 import com.aliyun.learnjava.dao.StudentDao;
 import com.aliyun.learnjava.entity.Student;
 
@@ -13,8 +14,12 @@ public class StudentService {
     @Autowired
     private StudentDao studentDao;
 
-    public Student getById(long id) {
-        return studentDao.getById(id);
+    public Student getById(long id) throws NotFoundException {
+        Student student = studentDao.getById(id);
+        if (student == null) {
+            throw new NotFoundException("id: " + id + " in student table not found");
+        }
+        return student;
     }
 
     public List<Student> getAll(int limit, int offset) {
@@ -44,13 +49,14 @@ public class StudentService {
         return student;
     }
 
-    public Student updateStudent(Student student) {
+    public Student updateStudent(Student student) throws NotFoundException {
+        this.getById(student.getId());
         this.studentDao.updateById(student);
-        return this.studentDao.getById(student.getId());
+        return this.getById(student.getId());
     }
 
-    public Student patchStudent(Student input) {
-        Student student = this.studentDao.getById(input.getId());
+    public Student patchStudent(Student input) throws NotFoundException {
+        Student student = this.getById(input.getId());
         if (student != null) {
             if (input.getName() != null && !input.getName().isEmpty()) {
                 student.setName(input.getName());
@@ -67,5 +73,16 @@ public class StudentService {
             return this.updateStudent(student);
         }
         return null;
+    }
+
+    public boolean deleteStudent(long id) throws NotFoundException {
+        this.getById(id);
+        this.studentDao.deleteById(id);
+        try {
+            Student student = this.getById(id);
+            return student == null;
+        } catch (NotFoundException e) {
+            return true;
+        }
     }
 }

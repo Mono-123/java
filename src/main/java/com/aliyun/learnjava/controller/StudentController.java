@@ -3,6 +3,7 @@ package com.aliyun.learnjava.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aliyun.learnjava.service.StudentService;
+import com.aliyun.exception.NotFoundException;
 import com.aliyun.learnjava.entity.Student;
 
 @RestController()
@@ -31,7 +33,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public Student getById(@PathVariable("id") long id) {
+    public Student getById(@PathVariable("id") long id) throws NotFoundException {
         Student student = this.studentService.getById(id);
         return student;
     }
@@ -45,7 +47,7 @@ public class StudentController {
     public Student updateById(
         @PathVariable(name = "id") int id,
         @RequestBody Student student
-    ) {
+    ) throws NotFoundException {
         student.setId(id);
         return this.studentService.updateStudent(student);
     }
@@ -54,8 +56,15 @@ public class StudentController {
     public Student patchById(
         @PathVariable(name = "id") int id,
         @RequestBody Student student
-    ) {
+    ) throws NotFoundException {
         student.setId(id);
         return this.studentService.patchStudent(student);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteById(
+        @PathVariable(name = "id") long id
+    ) throws NotFoundException {
+        return this.studentService.deleteStudent(id);
     }
 }
