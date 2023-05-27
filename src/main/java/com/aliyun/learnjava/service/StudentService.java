@@ -48,4 +48,24 @@ public class StudentService {
         this.studentDao.updateById(student);
         return this.studentDao.getById(student.getId());
     }
+
+    public Student patchStudent(Student input) {
+        Student student = this.studentDao.getById(input.getId());
+        if (student != null) {
+            if (input.getName() != null && !input.getName().isEmpty()) {
+                student.setName(input.getName());
+            }
+            if (input.getGender() != 0) {
+                student.setGender(input.getGender());
+            }
+            if (input.getGrade() != 0) {
+                student.setGrade(input.getGrade());
+            }
+            if (input.getScore() != 0) {
+                student.setScore(input.getScore());
+            }
+            return this.updateStudent(student);
+        }
+        return null;
+    }
 }

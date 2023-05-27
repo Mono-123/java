@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,5 +48,14 @@ public class StudentController {
     ) {
         student.setId(id);
         return this.studentService.updateStudent(student);
+    }
+
+    @PatchMapping("/{id}")
+    public Student patchById(
+        @PathVariable(name = "id") int id,
+        @RequestBody Student student
+    ) {
+        student.setId(id);
+        return this.studentService.patchStudent(student);
     }
 }
