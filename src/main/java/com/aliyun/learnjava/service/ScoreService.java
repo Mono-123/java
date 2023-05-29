@@ -27,13 +27,13 @@ public class ScoreService {
     }
     
     public Score inserScore(
-        long  scoreId,
+        long  studentId,
         int chinese,
         int math,
         int english
     ) {
         Score score = new Score();
-        score.setStudentId(scoreId);
+        score.setStudentId(studentId);
         score.setChinese(chinese);
         score.setMath(math);
         score.setEnglish(english);
