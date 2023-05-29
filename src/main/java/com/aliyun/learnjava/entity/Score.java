@@ -15,19 +15,19 @@ public class Score {
         return this.id;
     }
 
-    public void setstudentId(long studentId) {
+    public void setStudentId(long studentId) {
         this.studentId = studentId;
     }
 
-    public long getstudentId() {
+    public long getStudentId() {
         return this.studentId;
     }
 
-    public void setchinese(int chinese) {
+    public void setChinese(int chinese) {
         this.chinese = chinese;
     }
 
-    public int getchinese() {
+    public int getChinese() {
         return this.chinese;
     }
 
@@ -39,11 +39,11 @@ public class Score {
         return this.math;
     }
 
-    public void setenglish(int english) {
+    public void setEnglish(int english) {
         this.english = english;
     }
 
-    public int getenglish() {
+    public int getEnglish() {
         return this.english;
     }
 
@@ -69,9 +69,5 @@ public class Score {
         sb.append(", ");
         sb.append("english: " + this.english);
         return sb.toString();
-    }
-
-    public int get_Score() {
-        return 0;
     }
 }

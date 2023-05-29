@@ -14,11 +14,11 @@ public class Grade {
         return this.id;
     }
 
-    public void setName(int grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 
-    public int getName() {
+    public int getGrade() {
         return this.grade;
     }
 
@@ -30,11 +30,11 @@ public class Grade {
         return this.managerId;
     }
 
-    public void setisGraduated(int isGraduated) {
+    public void setIsGraduated(int isGraduated) {
         this.isGraduated = isGraduated;
     }
 
-    public int getisGraduated() {
+    public int getIsGraduated() {
         return this.isGraduated;
     }
 
