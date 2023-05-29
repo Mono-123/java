@@ -2,11 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.aliyun.learnjava.dao.ScoreDao">
-    <select id="getScore" parameterType="long" resultType="com.aliyun.learnjava.entity.Score">
+    <resultMap id="scoreMap" type="com.aliyun.learnjava.entity.Score">
+        <id property="id" column="id"></id>
+        <result property="studentId" column="student_id"></result>
+        <result property="chinese" column="chinese"></result>
+        <result property="math" column="math"></result>
+        <result property="english" column="english"></result>
+    </resultMap>
+
+    <select id="getScore" parameterType="long" resultMap="scoreMap">
         SELECT * FROM score WHERE id = #{id}
     </select>
 
-    <select id="getScorePagination" resultType="com.aliyun.learnjava.entity.Score">
+    <select id="getScorePagination" resultMap="scoreMap">
         SELECT * FROM score LIMIT #{limit} OFFSET #{offset}
     </select>
 
@@ -23,7 +31,7 @@
         id="updateChinese"
         parameterType="com.aliyun.learnjava.entity.Score"
     >
-       UPDATE score SET student_id = #{score.studentId}, chinese = #{score.chinese},math = #{score.math},english = #{score.english}WHERE id = #{Score.id}
+        UPDATE score SET student_id = #{score.studentId}, chinese = #{score.chinese},math = #{score.math},english = #{score.english}WHERE id = #{Score.id}
     </update>
 
     <delete
