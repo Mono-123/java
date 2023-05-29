@@ -16,14 +16,14 @@
         useGeneratedKeys="true"
         keyProperty="id"
     >
-        INSERT INTO teacher (name,  gender) VALUES (#{Teacher.name}, #{Teacher.gender})
+        INSERT INTO teacher (name, gender) VALUES (#{teacher.name}, #{teacher.gender})
     </insert>
 
     <update
         id="updateTeacher"
         parameterType="com.aliyun.learnjava.entity.Teacher"
     >
-       UPDATE teacher SET name = #{Teacher.name} WHERE id = #{Teacher.id}
+       UPDATE teacher SET name = #{teacher.name},gender = #{teacher.gender}, WHERE id = #{teacher.id}
     </update>
 
     <delete

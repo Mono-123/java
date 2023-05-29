@@ -23,7 +23,7 @@
         id="updateClassesManager"
         parameterType="com.aliyun.learnjava.entity.Classes"
     >
-        UPDATE classes SET manager_id = #{classes.managerId} WHERE id = #{classes.id}
+        UPDATE classes SET name = #{classes.name}, manager_id = #{classes.managerId},grade_id = #{classes.gradeId}, WHERE id = #{classes.id}
     </update>
 
     <update

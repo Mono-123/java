@@ -23,7 +23,7 @@
         id="updateClassId"
         parameterType="com.aliyun.learnjava.entity.Students"
     >
-       UPDATE student SET class_id = #{student.class_id} WHERE id = #{student.id}
+       UPDATE student SET name = #{student.name},gender = #{student.gender}, class_id = #{student.classId} WHERE id = #{student.id}
     </update>
 
     <delete
