@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.aliyun.learnjava.dao.GradeDao">
+<mapper gradespace="com.aliyun.learnjava.dao.GradeDao">
     <select id="getGrade" parameterType="long" resultType="com.aliyun.learnjava.entity.Grade">
         SELECT * FROM grade WHERE id = #{id}
     </select>
@@ -20,15 +20,10 @@
     </insert>
 
     <update
-        id="updateGraduated"
-    >
-       UPDATE grade SET is_graduated = 1 WHERE grade = 4
-    </update>
-
-    <update
         id="updateGrade"
+        parameterType="com.aliyun.learnjava.entity.Grade"
     >
-        UPDATE grade SET grade = grade + 1 WHERE grade&lt;4 
+        UPDATE grade SET grade = #{grade.grade}, manager_id = #{grade.managerId},  is_graduated = #{grade.isGraduated} WHERE id = #{grade.id}
     </update>
 
     <delete
