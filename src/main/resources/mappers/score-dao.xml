@@ -31,7 +31,7 @@
         id="updateChinese"
         parameterType="com.aliyun.learnjava.entity.Score"
     >
-        UPDATE score SET student_id = #{score.studentId}, chinese = #{score.chinese},math = #{score.math},english = #{score.english}WHERE id = #{Score.id}
+        UPDATE score SET student_id = #{score.studentId}, chinese = #{score.chinese},math = #{score.math},english = #{score.english} WHERE id = #{score.id}
     </update>
 
     <delete
