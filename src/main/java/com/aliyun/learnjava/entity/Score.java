@@ -2,7 +2,7 @@ package com.aliyun.learnjava.entity;
 
 public class Score {
     private long id;
-    private long studentId;
+    private int studentId;
     private int chinese;
     private int math;
     private int english;
@@ -15,11 +15,11 @@ public class Score {
         return this.id;
     }
 
-    public void setStudentId(long studentId) {
+    public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
 
-    public long getStudentId() {
+    public int getStudentId() {
         return this.studentId;
     }
 
@@ -49,7 +49,7 @@ public class Score {
 
     public Score() {}
 
-    public Score(long studentId, int chinese, int grade , int english) {
+    public Score(int studentId, int chinese, int grade , int english) {
         this.studentId = studentId;
         this.chinese = chinese;
         this.math = grade;

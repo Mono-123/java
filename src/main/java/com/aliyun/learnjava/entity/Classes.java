@@ -2,9 +2,9 @@ package com.aliyun.learnjava.entity;
 
 public class Classes {
     private long id;
-    private int name;
-    private int managerId;
-    private int gradeId;
+    private Integer name;
+    private Integer managerId;
+    private Integer gradeId;
 
     public void setId(long id) {
         this.id = id;
@@ -14,33 +14,33 @@ public class Classes {
         return this.id;
     }
 
-    public void setName(int name) {
+    public void setName(Integer name) {
         this.name = name;
     }
 
-    public int getName() {
+    public Integer getName() {
         return this.name;
     }
 
-    public void setManagerId(int managerId) {
+    public void setManagerId(Integer managerId) {
         this.managerId = managerId;
     }
 
-    public int getManagerId() {
+    public Integer getManagerId() {
         return this.managerId;
     }
 
-    public void setGradeId(int gradeId) {
+    public void setGradeId(Integer gradeId) {
         this.gradeId = gradeId;
     }
 
-    public int getGradeId() {
+    public Integer getGradeId() {
         return this.gradeId;
     }
 
     public Classes() {}
 
-    public Classes(int name, int managerId, int gradeId , int score) {
+    public Classes(Integer name, Integer managerId, Integer gradeId , Integer score) {
         this.name = name;
         this.managerId = managerId;
         this.gradeId = gradeId;

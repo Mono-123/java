@@ -4,7 +4,7 @@ public class Teacher {
     
     private long id;
     private String name;
-    private int gender;
+    private Integer gender;
 
     public void setId(long id) {
         this.id = id;
@@ -22,17 +22,17 @@ public class Teacher {
         return this.name;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return this.gender;
     }
 
     public Teacher() {}
 
-    public Teacher(String name, int gender) {
+    public Teacher(String name, Integer gender) {
         this.name = name;
         this.gender = gender;
     }

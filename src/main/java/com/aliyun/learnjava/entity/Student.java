@@ -3,9 +3,9 @@ package com.aliyun.learnjava.entity;
 public class Student {
     private long id;
     private String name;
-    private int gender;
-    private int grade;
-    private int score;
+    private Integer gender;
+    private Integer grade;
+    private Integer score;
 
     public void setId(long id) {
         this.id = id;
@@ -15,15 +15,15 @@ public class Student {
         this.name = name;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
@@ -35,15 +35,15 @@ public class Student {
         return name;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public int getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
