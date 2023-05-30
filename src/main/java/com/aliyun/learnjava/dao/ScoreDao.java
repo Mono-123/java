@@ -12,9 +12,9 @@ public interface ScoreDao {
 
     List<Score> getScorePagination(@Param("limit") int limit, @Param("offset") int offset);
 
-    void insertScore(@Param("Score") Score Score);
+    void insertScore(@Param("score") Score score);
 
-    void updateChinese(@Param("Score") Score Score);
+    void updateChinese(@Param("score") Score score);
 
     void deleteScore(@Param("id") long id);
 }

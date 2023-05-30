@@ -11,9 +11,9 @@ public interface TeacherDao {
 
     List<Teacher> getTeacherPagination(@Param("limit") int limit, @Param("offset") int offset);
 
-    void insertTeacher(@Param("Teacher") Teacher Teacher);
+    void insertTeacher(@Param("teacher") Teacher teacher);
 
-    void updateTeacher(@Param("Teacher") Teacher Teacher);
+    void updateTeacher(@Param("teacher") Teacher teacher);
 
     void deleteTeacher(@Param("id") long id);
 }

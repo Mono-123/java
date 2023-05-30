@@ -11,11 +11,13 @@ public interface GradeDao {
 
     List<Grade> getGradePagination(@Param("limit") int limit, @Param("offset") int offset);
 
-    void insertGrade(@Param("Grade") Grade Grade);
+    List<Grade> getGraduate();
 
-    //void updateGraduated();
+    void insertGrade(@Param("grade") Grade grade);
 
-    void updateGrade(@Param("Grade") Grade Grade);
+    void updateGraduate();
+
+    void updateGrade(@Param("grade") Grade grade);
 
     void deleteGrade(@Param("id") long id);
 }

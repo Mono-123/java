@@ -11,11 +11,9 @@ public interface ClassesDao {
 
     List<Classes> getClassesPagination(@Param("limit") int limit, @Param("offset") int offset);
 
-    long insertClasses(@Param("classes") Classes Classes);
+    long insertClasses(@Param("classes") Classes classes);
 
-    void updateClassesManager(@Param("classes") Classes Classes);
-
-    void updateGrade(@Param("classes") int isGrade);
+    void updateClasses(@Param("classes") Classes classes);
 
     void deleteClasses(@Param("id") long id);
 }
