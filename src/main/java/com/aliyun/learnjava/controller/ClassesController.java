@@ -43,12 +43,12 @@ public class ClassesController {
     }
 
     @PutMapping("/{id}")
-    public Classes updateClassesManager(
+    public Classes updateClasses(
         @PathVariable(name = "id") int id,
         @RequestBody Classes classes
     ) throws NotFoundException {
         classes.setId(id);
-        return this.classesService.updateClassesManager(classes);
+        return this.classesService.updateClasses(classes);
     }
 
     @PatchMapping("/{id}")

@@ -37,9 +37,15 @@ public class GradeController {
         Grade grade = this.gradeService.getGrade(id);
         return grade;
     }
+    
     @PostMapping("")
     public Grade insertGrade(@RequestBody Grade grade) {
         return this.gradeService.inserGrade(grade);
+    }
+    
+    @PatchMapping("/graduate")
+    public List<Grade> updateGraduate() {
+        return this.gradeService.updateGraduate();
     }
 
     @PutMapping("/{id}")
