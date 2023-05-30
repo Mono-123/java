@@ -43,7 +43,7 @@ public class GradeController {
         return this.gradeService.inserGrade(grade);
     }
     
-    @PatchMapping("/graduate")
+    @PutMapping("/graduate")
     public List<Grade> updateGraduate() {
         return this.gradeService.updateGraduate();
     }
