@@ -22,14 +22,14 @@ public class ClassesService {
         return classesDao.getClasses(id);
     }
 
-    public List<Classes> getClassesPagination(int limit, int offset) {
+    public List<Classes> getClassesPagination(int limit,Integer offset) {
         return this.classesDao.getClassesPagination(limit, offset);
     }
 
     public Classes inserClasses(
-            int name,
-            int managerId,
-            int gradeId) {
+           Integer name,
+           Integer managerId,
+           Integer gradeId) {
         Classes classes = new Classes();
         classes.setName(name);
         classes.setManagerId(managerId);
@@ -46,25 +46,25 @@ public class ClassesService {
         return classes;
     }
 
-    public Classes updateClassesManager(Classes classes) throws NotFoundException {
+    public Classes updateClasses(Classes classes) throws NotFoundException {
         this.getClasses(classes.getId());
-        this.classesDao.updateClassesManager(classes);
+        this.classesDao.updateClasses(classes);
         return this.getClasses(classes.getId());
     }
 
     public Classes patchClasses(Classes input) throws NotFoundException {
         Classes classes = this.getClasses(input.getId());
         if (classes != null) {
-            if (input.getName() != 0) {
+            if (input.getName()== null) {
                 classes.setName(input.getName());
             }
-            if (input.getManagerId() != 0) {
+            if (input.getManagerId()== null) {
                 classes.setManagerId(input.getManagerId());
             }
-            if (input.getGradeId() != 0) {
+            if (input.getGradeId()== null) {
                 classes.setGradeId(input.getGradeId());
             }
-            return this.updateClassesManager(classes);
+            return this.updateClasses(classes);
         }
         return null;
     }

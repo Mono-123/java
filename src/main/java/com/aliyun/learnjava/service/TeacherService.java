@@ -27,7 +27,7 @@ public class TeacherService {
       
     public Teacher inserTeacher(
         String  name,
-        int gender
+        Integer gender
     ) {
         Teacher teacher = new Teacher();
         teacher.setName(name);
@@ -53,7 +53,7 @@ public class TeacherService {
             if (input.getName() != null && !input.getName().isEmpty()) {
                 teacher.setName(input.getName());
             }
-            if (input.getGender() != 0) {
+            if (input.getGender() == null ) {
                 teacher.setGender(input.getGender());
             }
             return this.updateTeacher(teacher);

@@ -22,15 +22,15 @@ public class StudentService {
         return student;
     }
 
-    public List<Student> getAll(int limit, int offset) {
+    public List<Student> getAll(Integer limit, Integer offset) {
         return this.studentDao.getAll(limit, offset);
     }
 
     public Student inserStudent(
         String name,
-        int gender,
-        int grade,
-        int score
+        Integer gender,
+        Integer grade,
+        Integer score
     ) {
         Student stu = new Student();
         stu.setName(name);
@@ -61,13 +61,13 @@ public class StudentService {
             if (input.getName() != null && !input.getName().isEmpty()) {
                 student.setName(input.getName());
             }
-            if (input.getGender() != 0) {
+            if (input.getGender() == null ) {
                 student.setGender(input.getGender());
             }
-            if (input.getGrade() != 0) {
+            if (input.getGrade() == null ) {
                 student.setGrade(input.getGrade());
             }
-            if (input.getScore() != 0) {
+            if (input.getScore() == null ) {
                 student.setScore(input.getScore());
             }
             return this.updateStudent(student);

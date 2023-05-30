@@ -51,6 +51,11 @@ public class GradeService {
         return this.getGrade(grade.getId());
     }
 
+    public List<Grade> updateGraduate(){
+        this.gradeDao.updateGraduate();
+        return this.gradeDao.getGraduate(); 
+    }
+
     public Grade patchGrade(Grade input) throws NotFoundException {
         Grade grade = this.getGrade(input.getId());
         if (grade != null) {
@@ -68,13 +73,6 @@ public class GradeService {
         return null;
     }
 
-    // public void updateGrade(){
-    //     this.gradeDao.updateGrade();
-    // }
-
-    // public void updateGraduated(){
-    //     this.gradeDao.updateGraduated();
-    // }
 
     public boolean deleteGrade(long id) throws NotFoundException {
         this.getGrade(id);

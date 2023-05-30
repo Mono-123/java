@@ -27,7 +27,7 @@ public class ScoreService {
     }
     
     public Score inserScore(
-        long  studentId,
+        int  studentId,
         int chinese,
         int math,
         int english
