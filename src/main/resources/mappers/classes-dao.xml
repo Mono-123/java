@@ -2,11 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.aliyun.learnjava.dao.ClassesDao">
-    <select id="getClasses" parameterType="long" resultType="com.aliyun.learnjava.entity.Classes">
+
+    <resultMap id="classesMap" type="com.aliyun.learnjava.entity.Classes">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="managerId" column="manager_id"></result>
+        <result property="gradeId" column="grade_id"></result>
+    </resultMap>
+
+    <select id="getClasses" parameterType="long" resultMap="classesMap">
         SELECT * FROM classes WHERE id = #{id}
     </select>
 
-    <select id="getClassesPagination" resultType="com.aliyun.learnjava.entity.Classes">
+    <select id="getClassesPagination" resultMap="classesMap">
         SELECT * FROM classes LIMIT #{limit} OFFSET #{offset}
     </select>
 
@@ -20,17 +28,10 @@
     </insert>
 
     <update
-        id="updateClassesManager"
+        id="updateClasses"
         parameterType="com.aliyun.learnjava.entity.Classes"
     >
         UPDATE classes SET name = #{classes.name}, manager_id = #{classes.managerId},grade_id = #{classes.gradeId}, WHERE id = #{classes.id}
-    </update>
-
-    <update
-        id="updateGrade"
-        parameterType="com.aliyun.learnjava.entity.Classes"
-    >
-        UPDATE classes SET grade_id = #{classes.gradeId}
     </update>
 
     <delete

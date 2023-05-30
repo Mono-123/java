@@ -2,11 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.aliyun.learnjava.dao.StudentsDao">
-    <select id="getStudent" parameterType="long" resultType="com.aliyun.learnjava.entity.Students">
+        <resultMap id="studentsMap" type="com.aliyun.learnjava.entity.Students">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="gender" column="gender"></result>
+        <result property="classId" column="class_id"></result>
+</resultMap>
+
+    <select id="getStudent" parameterType="long" resultMap="studentsMap">
         SELECT * FROM student WHERE id = #{id}
     </select>
 
-    <select id="getStudentPagination" resultType="com.aliyun.learnjava.entity.Students">
+    <select id="getStudentPagination" resultMap="studentsMap">
         SELECT * FROM student LIMIT #{limit} OFFSET #{offset}
     </select>
 
