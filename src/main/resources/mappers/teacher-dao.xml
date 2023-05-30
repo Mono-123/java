@@ -23,7 +23,7 @@
         id="updateTeacher"
         parameterType="com.aliyun.learnjava.entity.Teacher"
     >
-       UPDATE teacher SET name = #{teacher.name},gender = #{teacher.gender}, WHERE id = #{teacher.id}
+       UPDATE teacher SET name = #{teacher.name},gender = #{teacher.gender} WHERE id = #{teacher.id}
     </update>
 
     <delete
