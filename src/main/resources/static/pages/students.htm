@@ -26,6 +26,12 @@
         th {
             border: 1px dashed gray;
         }
+
+        form {
+            border: 1px solid rgb(202, 216, 10);
+            padding: 5px 0 15px 25px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
@@ -40,6 +46,35 @@
         offset: <input id="offset" type="number" />
         <button onclick="sendRequest()">获取</button>
     </p>
+
+    <form name="studentform" onsubmit="return false;">
+        <p>
+            名称: 
+            <input name="name" />
+        </p>
+        <p>
+            性别: 
+            女 <input name="gender" type="radio" value="0">
+            男 <input name="gender" type="radio" value="1">
+        </p>
+        <p>
+            年级: 
+            <select name="grade">
+                <option value="1">一年级</option>
+                <option value="2">二年级</option>
+                <option value="3">三年级</option>
+                <option value="4">四年级</option>
+            </select>
+        </p>
+        <p>
+            分数: 
+            <input name="score" type="number" />
+        </p>
+
+        <input type="button" value="提交" onclick="handleSubmit()" />
+
+        <input type="reset" value="重置" />
+    </form>
 
     <table>
         <thead>
@@ -93,6 +128,57 @@
             for (let i = 0; i < data.length; i++) {
                 addRow(data[i])
             }
+        }
+
+        sendRequest()
+
+        async function insertStudent(body) {
+            const url = 'http://localhost:8080/student'
+            console.log('请求地址：', url)
+            
+            const data = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            }).then(function getRequestFromAPI(response) {
+                return response.json()
+            })
+            return data
+        }
+
+        async function handleSubmit() {
+            console.log('点击了提交按钮')
+            const form = document.forms.studentform
+            const formData = new FormData(form)
+            const requestData = Object.fromEntries(formData)
+
+            if (!requestData.name || !requestData.name.trim()) {
+                alert("姓名没有输入，无法提交")
+                return
+            } else {
+                requestData.name = requestData.name.trim()
+            }
+            if (!requestData.gender || !requestData.gender.trim()) {
+                alert("性别没有输入，无法提交")
+                return
+            } else {
+                requestData.gender = requestData.gender.trim()
+            }
+            if (!requestData.score ||   !requestData.score.trim()) {
+                alert("分数没有输入，无法提交")
+                return
+            } else {
+                requestData.score = requestData.score.trim()
+            }
+
+            const responseData = await insertStudent(requestData)
+            console.log('请求返回值：', responseData)
+            table.innerHTML = ''
+            addRow(responseData)
+
+            form.reset()
         }
     </script>
 </body>
