@@ -84,6 +84,7 @@
                 <th>性别</th>
                 <th>年级</th>
                 <th>分数</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody id="table">
@@ -105,6 +106,7 @@
             recordHtml += '<td>' + (record.gender ? '男' : '女  ') + '</td>'
             recordHtml += '<td>' + grades[record.grade - 1] + '</td>'
             recordHtml += '<td>' + record.score + '</td>'
+            recordHtml += '<td><button onclick="handleDelete(' + record.id + ')">删除</button></td>'
             recordHtml += '</tr>'
             table.innerHTML += recordHtml
         }
@@ -179,6 +181,24 @@
             addRow(responseData)
 
             form.reset()
+        }
+    
+        async function deleteStudent(id) {
+            const url = 'http://localhost:8080/student/' + id
+            console.log('请求地址：', url)
+            
+            const data = await fetch(url, {
+                method: 'DELETE',
+            }).then(function getRequestFromAPI(response) {
+                return response.json()
+            })
+            return data
+        }
+
+        async function handleDelete(id) {
+            console.log('点击了删除按钮, id:', id)
+            await deleteStudent(id)
+            await sendRequest()
         }
     </script>
 </body>
