@@ -14,7 +14,7 @@
     </select>
 
     <select id="getGraduate" resultMap="gradeMap">
-        SELECT * FROM grade WHERE Grade = 4
+        SELECT * FROM grade WHERE Grade = 4 and is_graduated = 0
     </select>
 
     <select id="getGradePagination" resultMap="gradeMap">
@@ -31,7 +31,7 @@
     </insert>
 
     <update
-        id="updateGraduated"
+        id="updateGraduate"
     >
        UPDATE grade SET is_graduated = 1 WHERE grade = 4
     </update>

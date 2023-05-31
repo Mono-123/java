@@ -3,8 +3,8 @@ package com.aliyun.learnjava.entity;
 public class Students {
     private long id;
     private String name;
-    private int managerId;
-    private int gradeId;
+    private int gender;
+    private int classId;
 
     public void setId(long id) {
         this.id = id;
@@ -22,29 +22,29 @@ public class Students {
         return this.name;
     }
 
-    public void setManagerId(int managerId) {
-        this.managerId = managerId;
+    public void setGender(int gender) {
+        this.gender = gender;
     }
 
-    public int getManagerId() {
-        return this.managerId;
+    public int getGender() {
+        return this.gender;
     }
 
-    public void setGradeId(int gradeId) {
-        this.gradeId = gradeId;
+    public void setClassId(int classId) {
+        this.classId = classId;
     }
 
-    public int getGradeId() {
-        return this.gradeId;
+    public int getClassId() {
+        return this.classId;
     }
 
 
     public Students() {}
 
-    public Students(String name, int managerId, int gradeId , int score) {
+    public Students(String name, int gender, int classId , int score) {
         this.name = name;
-        this.managerId = managerId;
-        this.gradeId = gradeId;
+        this.gender = gender;
+        this.classId = classId;
     }
 
     @Override
@@ -54,9 +54,9 @@ public class Students {
         sb.append(", ");
         sb.append("name: " + this.name);
         sb.append(", ");
-        sb.append("managerId: " + this.managerId);
+        sb.append("gender: " + this.gender);
         sb.append(", ");
-        sb.append("gradeId: " + this.gradeId);
+        sb.append("classId: " + this.classId);
         return sb.toString();
     }
 }

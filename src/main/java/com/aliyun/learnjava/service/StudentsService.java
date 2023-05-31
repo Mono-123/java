@@ -28,13 +28,13 @@ public class StudentsService {
 
     public Students inserStudents(
         String  name,
-        int managerId,
-        int gradeId
+        int gender,
+        int classId
     ) {
         Students students = new Students();
         students.setName(name);
-        students.setManagerId(managerId);
-        students.setGradeId(gradeId);
+        students.setGender(gender);
+        students.setClassId(classId);
         this.studentsDao.insertStudent(students);
         return students;
     }
@@ -56,11 +56,11 @@ public class StudentsService {
             if (input.getName() != null && !input.getName().isEmpty()) {
                 students.setName(input.getName());
             }
-            if (input.getManagerId() != 0) {
-                students.setManagerId(input.getManagerId());
+            if (input.getGender() != 0) {
+                students.setGender(input.getGender());
             }
-            if (input.getGradeId() != 0) {
-                students.setGradeId(input.getGradeId());
+            if (input.getClassId() != 0) {
+                students.setClassId(input.getClassId());
             }
         
             return this.updateClassId(students);

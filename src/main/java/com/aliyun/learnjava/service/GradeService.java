@@ -52,8 +52,9 @@ public class GradeService {
     }
 
     public List<Grade> updateGraduate(){
+        List<Grade> Graduate = this.gradeDao.getGraduate(); 
         this.gradeDao.updateGraduate();
-        return this.gradeDao.getGraduate(); 
+        return Graduate; 
     }
 
     public Grade patchGrade(Grade input) throws NotFoundException {
