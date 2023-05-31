@@ -28,7 +28,7 @@ public class GradeController {
     public List<Grade> getGradePagination(
         @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
         @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
-        List<Grade> grade = this.gradeService.getGradePagination(10, 0);
+        List<Grade> grade = this.gradeService.getGradePagination(limit, offset);
         return grade;
     }
 

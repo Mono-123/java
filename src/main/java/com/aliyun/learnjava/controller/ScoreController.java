@@ -28,7 +28,7 @@ public class ScoreController {
     public List<Score> getScorePagination(
         @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
         @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
-        List<Score> score = this.scoreService.getScorePagination(10, 0);
+        List<Score> score = this.scoreService.getScorePagination(limit, offset);
         return score;
     }
 

@@ -28,7 +28,7 @@ public class ClassesController {
     public List<Classes> getClassesPagination(
         @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
         @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
-        List<Classes> classes = this.classesService.getClassesPagination(10, 0);
+        List<Classes> classes = this.classesService.getClassesPagination(limit, offset);
         return classes;
     }
 

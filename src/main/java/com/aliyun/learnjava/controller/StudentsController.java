@@ -28,7 +28,7 @@ public class StudentsController {
     public List<Students> getStudentPagination(
         @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
         @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
-        List<Students> students = this.studentsService.getStudentPagination(10, 0);
+        List<Students> students = this.studentsService.getStudentPagination(limit, offset);
         return students;
     }
 
