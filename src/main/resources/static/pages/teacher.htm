@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            background-color: #eeeeee;
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        th {
+            border: 1px dashed gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Teacher</h1>
+    <p>
+        <a href="/index.htm">Home Page</a>
+    </p>
+
+    <p>
+        limit: <input id="limit" type="number" />
+        offset: <input id="offset" type="number" />
+        <button onclick="sendRequest()">获取</button>
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>老师姓名</th>
+                <th>性别</th>
+            </tr>
+        </thead>
+        <tbody id="table">
+        </tbody>
+    </table>
+
+    <script>
+        const table = document.getElementById('table')
+        const limitInput = document.getElementById('limit')
+        const offsetInput = document.getElementById('offset')
+
+        function addRow(record) {
+            let recordHtml = ''
+            recordHtml += '<tr>'
+            recordHtml += '<td>' + record.id + '</td>'
+            recordHtml += '<td>' + record.name + '</td>'
+            recordHtml += '<td>' +  (record.gender ? '男' : '女  ') + '</td>'
+            recordHtml += '</tr>'
+            table.innerHTML += recordHtml
+        }
+
+        async function getTeacher(limit, offset) {
+            const url = 'http://localhost:8080/teacher/list?limit=' + limit + '&offset=' + offset
+            console.log('请求地址：', url)
+            const data = await fetch(url).then(function getRequestFromAPI(response) {
+                return response.json()
+            })
+            return data
+        }
+
+        async function sendRequest() {
+            const limit = limitInput.value
+            const offset = offsetInput.value
+            const data = await getTeacher(limit, offset)
+            console.log('请求返回值：', data)
+
+            table.innerHTML = ''
+            for (let i = 0; i < data.length; i++) {
+                addRow(data[i])
+            }
+        }
+    </script>
+</body>
+
+</html>
