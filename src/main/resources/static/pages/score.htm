@@ -113,9 +113,11 @@
                     "math": math,
                     "english": english
                 })
-            })
-             return data
-           
+            }).then(function getRequestFromAPI(response) {
+                return response.json()
+            })  
+            return data
+
         }
 
         async function sendInsert() {
@@ -123,13 +125,11 @@
             const chinese = chineseInput.value
             const math = mathInput.value
             const english = englishInput.value
-            const data = await insertScore(studentId,chinese,math,english)
+            const data = await insertScore(studentId, chinese, math, english)
             console.log('插入数据', data)
 
             table.innerHTML = ''
-            for (let i = 0; i < data.length; i++) {
-                addRow(data[i])
-            }
+                addRow(data)
         }
 
 

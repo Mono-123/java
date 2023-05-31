@@ -24,7 +24,7 @@
         useGeneratedKeys="true"
         keyProperty="id"
     >
-        INSERT INTO score (student_id,chinese,math,english) VALUES (#{Score.studentId}, #{Score.chinese},#{Score.math},#{Score.english})
+        INSERT INTO score (student_id,chinese,math,english) VALUES (#{score.studentId}, #{score.chinese},#{score.math},#{score.english})
     </insert>
 
     <update
