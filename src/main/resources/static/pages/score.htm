@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student</title>
+    <title>Score</title>
     <style>
         table {
             border: 1px solid black;
@@ -65,29 +65,37 @@
         <br>
         英语成绩: <input id="english" type="number" />
         <br>
-        <button onclick="sendInsert()">确认插入</button>
+        <button onclick="handleSubmit()">确认插入</button>
         <input type="reset" value="重置" />
     </p>
 
-    <p>
-        <h4>更新数据</h4>
-    </p>
-    <p>
-        Id：<input id="id" type="number" readonly="true"  />
-        <br>
-        学生学号: <input id="studentId" type="number" />
-        <br>
-        语文成绩: <input id="chinese" type="number" />
+    <form name="scoreform2" onsubmit="return false;">
+        <h2>更新</h2>
+        <p>
+            Id:
+            <input name="id" readonly="true" />
+        </p>
+        <p>
+            学生ID:
+            <input name="studentId" />
+        </p>
+        <p>
+            语文成绩: 
+            <input name="chinese" type="number" />
+        </p>
+        <p>
+            数学成绩: 
+            <input name="math" type="number" />
+        </p>
+        <p>
+            英语成绩: 
+            <input name="english" type="number" />
+        </p>
+       
 
-        <br>
-        数学成绩: <input id="math" type="number" />
-
-        <br>
-        英语成绩: <input id="english" type="number" />
-        <br>
-        <button onclick="sendInsert()">提交</button>
+        <input type="button" value="提交" onclick="handleUpdate()" />
         <input type="reset" value="重置" />
-    </p>
+    </form>
     <table>
         <thead>
             <tr>
@@ -96,7 +104,7 @@
                 <th>语文成绩</th>
                 <th>数学成绩</th>
                 <th>英语成绩</th>
-                <th>修改</th>
+                <th>操作</th>
 
             </tr>
         </thead>
@@ -113,7 +121,7 @@
         const chineseInput = document.getElementById('chinese')
         const mathInput = document.getElementById('math')
         const englishInput = document.getElementById('english')
-        
+        const form2 = document.forms.scoreform2
 
         function addRow(record) {
             let recordHtml = ''
@@ -125,7 +133,7 @@
             recordHtml += '<td>' + record.english + '</td>'
             recordHtml += '<td>'
             recordHtml += '  <button onclick="handleDelete(' + record.id + ')">删除</button>'
-            recordHtml += '  <button onclick="clickUpdate(' + record.id + ', ' + record.stuedntId + ', ' + record.chinese + ', ' + record.math + ' ' + record.english + ')">更新</button>'
+            recordHtml += '  <button onclick="clickUpdate(' + record.id + ', ' + record.studentId + ', ' + record.chinese + ', ' + record.math + ' ,' + record.english + ')">更新</button>'
             recordHtml += '</td>'
             recordHtml += '</tr>'
             table.innerHTML += recordHtml
@@ -139,12 +147,47 @@
             })
             return data
         }
+        async function sendRequest() {
+            const limit = limitInput.value
+            const offset = offsetInput.value
+            const data = await getScore(limit, offset)
+            console.log('请求返回值：', data)
 
+            table.innerHTML = ''
+            for (let i = 0; i < data.length; i++) {
+                addRow(data[i])
+            }
+        }
+        sendRequest()
+
+        async function getById(id) {
+            const url = 'http://localhost:8080/score/' + id
+            console.log('请求地址：', url)
+            if (!id || !id.trim()) {
+                alert("id没有输入，无法提交")
+                return
+            } else {
+                id = id.trim()
+            }
+            const data = await fetch(url).then(function getRequestFromAPI(response) {
+                return response.json()
+            })
+            return data
+        }
+
+        async function sendSelect() {
+            const id = idInput.value
+            const data = await getById(id)
+            console.log('请求返回值：', data)
+
+            table.innerHTML = ''
+            addRow(data)
+
+        }
 
         async function insertScore(studentId, chinese, math, english) {
             const url = 'http://localhost:8080/score'
             console.log('请求地址：', url)
-            
             console.log('请求载荷：', studentId, chinese, math, english)
 
             const data = await fetch(url, {
@@ -157,40 +200,135 @@
                     "chinese": chinese,
                     "math": math,
                     "english": english
-                })
-            }).then(function getRequestFromAPI(response) {
+                })}).then(function getRequestFromAPI(response) {
                 return response.json()
             })
             return data
+}
 
-        }
-
-        async function sendInsert() {
+        async function handleSubmit() {
+            console.log('点击了提交按钮')
             const studentId = studentIdInput.value
             const chinese = chineseInput.value
             const math = mathInput.value
-            const english = englishInput.value
+            const english = englishInput.valueconst 
+            requestData = Object.fromEntries(formData)
             const data = await insertScore(studentId, chinese, math, english)
             console.log('插入数据', data)
-
+            if (!studentId || !studentId.trim()) {
+                alert("学生ID没有输入，无法提交")
+                return
+            } else {
+                studentId = studentId.trim()
+            }
+            if (!chinese || !chinese.trim()) {
+                alert("语文成绩没有输入，无法提交")
+                return
+            } else {
+                chinese = chinese.trim()
+            }
+            if (!math || !math.trim()) {
+                alert("数学成绩没有输入，无法提交")
+                return
+            } else {
+                math = math.trim()
+            }
+            if (!english || !english.trim()) {
+                alert("英语成绩没有输入，无法提交")
+                return
+            } else {
+                english = english.trim()
+            }
             table.innerHTML = ''
             addRow(data)
         }
 
+        async function deleteStudent(id) {
+            const url = 'http://localhost:8080/score/' + id
+            console.log('请求地址：', url)
 
-        async function sendRequest() {
-            const limit = limitInput.value
-            const offset = offsetInput.value
-            const data = await getScore(limit, offset)
-            console.log('请求返回值：', data)
-
-            table.innerHTML = ''
-            for (let i = 0; i < data.length; i++) {
-                addRow(data[i])
-            }
+            const data = await fetch(url, {
+                method: 'DELETE',
+            }).then(function getRequestFromAPI(response) {
+                return response.json()
+            })
+            return data
         }
 
+        async function handleDelete(id) {
+            console.log('点击了删除按钮, id:', id)
+            await deleteStudent(id)
+            await sendRequest()
+        }
 
+        function clickUpdate(id, studentId, chinese, math, english) {
+            form2.id.value = id
+            form2.studentId.value = studentId
+            form2.chinese.value = chinese
+            form2.math.value = math
+            form2.english.value = english
+            console.log('更新数据：', { id, studentId, chinese, math, english })
+        }
+
+        async function updateStudent(id, body) {
+            const url = 'http://localhost:8080/score/' + id
+            console.log('请求地址：', url)
+            console.log('请求载荷：', body)
+
+            const data = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            }).then(function getRequestFromAPI(response) {
+                return response.json()
+            })
+            return data
+        }
+
+        async function handleUpdate() {
+            console.log('点击了提交按钮')
+            const formData = new FormData(form2)
+            const requestData = Object.fromEntries(formData)
+            console.log('表单输入数据：', requestData)
+
+            if (!requestData.studentId || !requestData.studentId.trim()) {
+                alert("学生ID没有输入，无法提交")
+                return
+            } else {
+                requestData.studentId = requestData.studentId.trim()
+            }
+            if (!requestData.chinese || !requestData.chinese.trim()) {
+                alert("语文成绩没有输入，无法提交")
+                return
+            } else {
+                requestData.chinese = requestData.chinese.trim()
+            }
+            if (!requestData.math || !requestData.math.trim()) {
+                alert("数学成绩没有输入，无法提交")
+                return
+            } else {
+                requestData.math = requestData.math.trim()
+            }
+            if (!requestData.english || !requestData.english.trim()) {
+                alert("英语成绩没有输入，无法提交")
+                return
+            } else {
+                requestData.english = requestData.english.trim()
+            }
+            const responseData = await updateStudent(requestData.id, {
+                studentId: requestData.studentId,
+                chinese: requestData.chinese,
+                math: requestData.math,
+                english: requestData.english,
+            })
+            console.log('请求返回值：', responseData)
+            table.innerHTML = ''
+            addRow(responseData)
+
+            form2.reset()
+        }
     </script>
 </body>
 

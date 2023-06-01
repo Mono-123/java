@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student</title>
+    <title>Teacher</title>
     <style>
         table {
             border: 1px solid black;
@@ -171,7 +171,7 @@ async function sendSelect() {
 
 }
 
-async function insertStudent(body) {
+async function insertTeacher(body) {
     const url = 'http://localhost:8080/teacher'
     console.log('请求地址：', url)
     console.log('请求载荷：', body)
@@ -207,7 +207,7 @@ async function handleSubmit() {
         requestData.gender = requestData.gender.trim()
     }
 
-    const responseData = await insertStudent(requestData)
+    const responseData = await insertTeacher(requestData)
     console.log('请求返回值：', responseData)
     table.innerHTML = ''
     addRow(responseData)
@@ -215,7 +215,7 @@ async function handleSubmit() {
     form1.reset()
 }
 
-async function deleteStudent(id) {
+async function deleteTeacher(id) {
     const url = 'http://localhost:8080/teacher/' + id
     console.log('请求地址：', url)
 
@@ -229,7 +229,7 @@ async function deleteStudent(id) {
 
 async function handleDelete(id) {
     console.log('点击了删除按钮, id:', id)
-    await deleteStudent(id)
+    await deleteTeacher(id)
     await sendRequest()
 }
 
@@ -240,7 +240,7 @@ function clickUpdate(id, name, gender) {
     console.log('更新数据：', { id, name, gender})
 }
 
-async function updateStudent(id, body) {
+async function updateTeacher(id, body) {
     const url = 'http://localhost:8080/teacher/' + id
     console.log('请求地址：', url)
     console.log('请求载荷：', body)
@@ -276,7 +276,7 @@ async function handleUpdate() {
         requestData.gender = requestData.gender.trim()
     }
 
-    const responseData = await updateStudent(requestData.id, {
+    const responseData = await updateTeacher(requestData.id, {
         name: requestData.name,
         gender: requestData.gender,
     })
