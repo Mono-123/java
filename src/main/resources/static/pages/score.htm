@@ -5,26 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classes</title>
+    <title>Student</title>
     <style>
-        table,
-        th,
-        td {
-            border: 1px solid rgb(252, 105, 105);
-            background-color: aliceblue;
-        }
-
-        th,
-        td {
-            padding: 10px;
-        }
-
         table {
-            margin: auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            background-color: hsl(0, 0%, 100%);
+            display: inline-block;
         }
 
+        td,
         th {
-            border: 2px dashed rgb(144, 250, 144);
+            border: 1px black solid;
+            padding: 10px 25px
+        }
+
+        table th {
+            background-color: lightgray;
+        }
+
+        form {
+            border: 1px solid rgb(0, 0, 0);
+            padding: 0px 10px 10px;
+            margin: 10px;
+            display: inline-block;
+            vertical-align: top;
         }
     </style>
 </head>
@@ -35,23 +40,54 @@
         <a href="/index.htm">Home Page</a>
     </p>
 
+    <h4>分页查询</h4>
     <p>
         limit: <input id="limit" type="number" />
         offset: <input id="offset" type="number" />
         <button onclick="sendRequest()">获取</button>
     </p>
 
+    <h4>按id查询</h4>
+    请输入需要查找的id: <input id="id" type="number" />
+    <button onclick="sendSelect()">查询</button>
+    
     <p>
-        <a>插入数据</a>
+        <h4>插入数据</h4>
     </p>
     <p>
         学生学号: <input id="studentId" type="number" />
+        <br>
         语文成绩: <input id="chinese" type="number" />
+
+        <br>
         数学成绩: <input id="math" type="number" />
+
+        <br>
         英语成绩: <input id="english" type="number" />
+        <br>
         <button onclick="sendInsert()">确认插入</button>
+        <input type="reset" value="重置" />
     </p>
 
+    <p>
+        <h4>更新数据</h4>
+    </p>
+    <p>
+        Id：<input id="id" type="number" readonly="true"  />
+        <br>
+        学生学号: <input id="studentId" type="number" />
+        <br>
+        语文成绩: <input id="chinese" type="number" />
+
+        <br>
+        数学成绩: <input id="math" type="number" />
+
+        <br>
+        英语成绩: <input id="english" type="number" />
+        <br>
+        <button onclick="sendInsert()">提交</button>
+        <input type="reset" value="重置" />
+    </p>
     <table>
         <thead>
             <tr>
@@ -60,6 +96,8 @@
                 <th>语文成绩</th>
                 <th>数学成绩</th>
                 <th>英语成绩</th>
+                <th>修改</th>
+
             </tr>
         </thead>
         <tbody id="table">
@@ -70,10 +108,12 @@
         const table = document.getElementById('table')
         const limitInput = document.getElementById('limit')
         const offsetInput = document.getElementById('offset')
+        const idInput = document.getElementById('id')
         const studentIdInput = document.getElementById('studentId')
         const chineseInput = document.getElementById('chinese')
         const mathInput = document.getElementById('math')
         const englishInput = document.getElementById('english')
+        
 
         function addRow(record) {
             let recordHtml = ''
@@ -83,6 +123,10 @@
             recordHtml += '<td>' + record.chinese + '</td>'
             recordHtml += '<td>' + record.math + '</td>'
             recordHtml += '<td>' + record.english + '</td>'
+            recordHtml += '<td>'
+            recordHtml += '  <button onclick="handleDelete(' + record.id + ')">删除</button>'
+            recordHtml += '  <button onclick="clickUpdate(' + record.id + ', ' + record.stuedntId + ', ' + record.chinese + ', ' + record.math + ' ' + record.english + ')">更新</button>'
+            recordHtml += '</td>'
             recordHtml += '</tr>'
             table.innerHTML += recordHtml
         }
@@ -100,14 +144,15 @@
         async function insertScore(studentId, chinese, math, english) {
             const url = 'http://localhost:8080/score'
             console.log('请求地址：', url)
+            
+            console.log('请求载荷：', studentId, chinese, math, english)
 
             const data = await fetch(url, {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({  //这里是post请求的请求体
+                body: JSON.stringify({
                     "studentId": studentId,
                     "chinese": chinese,
                     "math": math,
@@ -115,7 +160,7 @@
                 })
             }).then(function getRequestFromAPI(response) {
                 return response.json()
-            })  
+            })
             return data
 
         }
@@ -129,7 +174,7 @@
             console.log('插入数据', data)
 
             table.innerHTML = ''
-                addRow(data)
+            addRow(data)
         }
 
 

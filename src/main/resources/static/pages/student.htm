@@ -9,16 +9,19 @@
     <style>
         table {
             border: 1px solid black;
-            border-collapse: collapse ;
+            border-collapse: collapse;
             background-color: hsl(0, 0%, 100%);
             display: inline-block;
         }
-        td,th{
-            border:1px black solid;
-            padding:10px 25px
+
+        body td,
+        th {
+            border: 1px black solid;
+            padding: 10px 25px
         }
-        table th{
-            background-color:lightgray;
+
+        table th {
+            background-color: lightgray;
         }
 
         form {
@@ -45,10 +48,10 @@
     </p>
 
     <h4>按学生id查询</h4>
-        请输入学生id: <input id="id" type="number" />
-        <button onclick="sendSelect()">查询</button>
-        <br>
-        <br>
+    请输入需要查找的学生id: <input id="id" type="number" />
+    <button onclick="sendSelect()">查询</button>
+    <br>
+    <br>
 
     <form name="studentform1" onsubmit="return false;">
         <h2>创建</h2>
@@ -101,6 +104,7 @@
         <input type="button" value="提交" onclick="handleUpdate()" />
         <input type="reset" value="重置" />
     </form>
+
     <table>
         <thead>
             <tr>
@@ -108,7 +112,7 @@
                 <th>名称</th>
                 <th>性别</th>
                 <th>班级</th>
-                <th>修改</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody id="table">
@@ -134,7 +138,7 @@
             recordHtml += '<td>' + classes[record.classId - 1] + '</td>'
             recordHtml += '<td>'
             recordHtml += '  <button onclick="handleDelete(' + record.id + ')">删除</button>'
-            recordHtml += '  <button onclick="clickUpdate(' + record.id + ', \'' + record.name + '\', ' + record.gender + ', ' + record.classId +')">更新</button>'
+            recordHtml += '  <button onclick="clickUpdate(' + record.id + ', \'' + record.name + '\', ' + record.gender + ', ' + record.classId + ')">更新</button>'
             recordHtml += '</td>'
             recordHtml += '</tr>'
             table.innerHTML += recordHtml
@@ -165,6 +169,12 @@
         async function getById(id) {
             const url = 'http://localhost:8080/students/' + id
             console.log('请求地址：', url)
+            if (!id || !id.trim()) {
+                alert("id没有输入，无法提交")
+                return
+            } else {
+                id = id.trim()
+            }
             const data = await fetch(url).then(function getRequestFromAPI(response) {
                 return response.json()
             })
@@ -178,9 +188,8 @@
 
             table.innerHTML = ''
             addRow(data)
-            
+
         }
-        sendSelect()
 
         async function insertStudent(body) {
             const url = 'http://localhost:8080/students'
@@ -299,7 +308,7 @@
 
             form2.reset()
         }
-        </script>
+    </script>
 </body>
 
 </html>
