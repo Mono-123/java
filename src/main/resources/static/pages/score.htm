@@ -211,34 +211,25 @@
             const studentId = studentIdInput.value
             const chinese = chineseInput.value
             const math = mathInput.value
-            const english = englishInput.valueconst 
-            requestData = Object.fromEntries(formData)
+            const english = englishInput.value
             const data = await insertScore(studentId, chinese, math, english)
             console.log('插入数据', data)
-            if (!studentId || !studentId.trim()) {
+            if (!data.studentId || !studentId.trim()) {
                 alert("学生ID没有输入，无法提交")
                 return
-            } else {
-                studentId = studentId.trim()
             }
-            if (!chinese || !chinese.trim()) {
+            if (!chinese ) {
                 alert("语文成绩没有输入，无法提交")
                 return
-            } else {
-                chinese = chinese.trim()
             }
-            if (!math || !math.trim()) {
+            if (!math) {
                 alert("数学成绩没有输入，无法提交")
                 return
-            } else {
-                math = math.trim()
             }
-            if (!english || !english.trim()) {
+            if (!english) {
                 alert("英语成绩没有输入，无法提交")
                 return
-            } else {
-                english = english.trim()
-            }
+            } 
             table.innerHTML = ''
             addRow(data)
         }
