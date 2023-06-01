@@ -2,10 +2,10 @@ package com.aliyun.learnjava.entity;
 
 public class Score {
     private long id;
-    private int studentId;
-    private int chinese;
-    private int math;
-    private int english;
+    private Integer studentId;
+    private Integer chinese;
+    private Integer math;
+    private Integer english;
 
     public void setId(long id) {
         this.id = id;
@@ -15,41 +15,41 @@ public class Score {
         return this.id;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(Integer studentId) {
         this.studentId = studentId;
     }
 
-    public int getStudentId() {
+    public Integer getStudentId() {
         return this.studentId;
     }
 
-    public void setChinese(int chinese) {
+    public void setChinese(Integer chinese) {
         this.chinese = chinese;
     }
 
-    public int getChinese() {
+    public Integer getChinese() {
         return this.chinese;
     }
 
-    public void setMath(int grade) {
+    public void setMath(Integer grade) {
         this.math = grade;
     }
 
-    public int getMath() {
+    public Integer getMath() {
         return this.math;
     }
 
-    public void setEnglish(int english) {
+    public void setEnglish(Integer english) {
         this.english = english;
     }
 
-    public int getEnglish() {
+    public Integer getEnglish() {
         return this.english;
     }
 
     public Score() {}
 
-    public Score(int studentId, int chinese, int grade , int english) {
+    public Score(Integer studentId, Integer chinese, Integer grade , Integer english) {
         this.studentId = studentId;
         this.chinese = chinese;
         this.math = grade;
