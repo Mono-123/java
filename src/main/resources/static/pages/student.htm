@@ -26,6 +26,14 @@
         th {
             border: 1px dashed gray;
         }
+
+        form {
+            border: 1px solid rgb(136, 244, 144);
+            padding: 5px 25px 15px;
+            margin: 10px;
+            display: inline-block;
+            vertical-align: top;
+        }
     </style>
 </head>
 
@@ -40,13 +48,66 @@
         offset: <input id="offset" type="number" />
         <button onclick="sendRequest()">获取</button>
     </p>
+    <form name="studentform1" onsubmit="return false;">
+        <h2>创建</h2>
+        <p>
+            名称:
+            <input name="name" />
+        </p>
+        <p>
+            性别:
+            女 <input name="gender" type="radio" value="0">
+            男 <input name="gender" type="radio" value="1">
+        </p>
+        <p>
+            班级:
+            <select name="classId">
+                <option value="1">一班</option>
+                <option value="2">二班</option>
+                <option value="3">三班</option>
+            </select>
+        </p>
 
+        <input type="button" value="提交" onclick="handleSubmit()" />
+
+        <input type="reset" value="重置" />
+    </form>
+
+    <form name="studentform2" onsubmit="return false;">
+        <h2>更新</h2>
+        <p>
+            Id:
+            <input name="id" readonly="true" />
+        </p>
+        <p>
+            名称:
+            <input name="name" />
+        </p>
+        <p>
+            性别:
+            女 <input name="gender" type="radio" value="0">
+            男 <input name="gender" type="radio" value="1">
+        </p>
+        <p>
+            班级:
+            <select name="classId">
+                <option value="1">一班</option>
+                <option value="2">二班</option>
+                <option value="3">三班</option>
+            </select>
+        </p>
+
+
+        <input type="button" value="提交" onclick="handleUpdate()" />
+
+        <input type="reset" value="重置" />
+    </form>
     <table>
         <thead>
             <tr>
                 <th>Id</th>
                 <th>名称</th>
-                <th>班主任</th>
+                <th>性别</th>
                 <th>班级</th>
             </tr>
         </thead>
@@ -58,8 +119,10 @@
         const table = document.getElementById('table')
         const limitInput = document.getElementById('limit')
         const offsetInput = document.getElementById('offset')
+        const form1 = document.forms.studentform1
+        const form2 = document.forms.studentform2
 
-        const classes = ['一班', '二班', '三班', '四班']
+        const classes = ['一班', '二班', '三班']
 
         function addRow(record) {
             let recordHtml = ''
@@ -68,6 +131,10 @@
             recordHtml += '<td>' + record.name + '</td>'
             recordHtml += '<td>' + (record.gender ? '男' : '女  ') + '</td>'
             recordHtml += '<td>' + classes[record.classId - 1] + '</td>'
+            recordHtml += '<td>'
+            recordHtml += '  <button onclick="handleDelete(' + record.id + ')">删除</button>'
+            recordHtml += '  <button onclick="clickUpdate(' + record.id + ', \'' + record.name + '\', ' + record.gender + ', ' + record.grade + ', ' + record.score + ')">更新</button>'
+            recordHtml += '</td>'
             recordHtml += '</tr>'
             table.innerHTML += recordHtml
         }
@@ -92,7 +159,125 @@
                 addRow(data[i])
             }
         }
-    </script>
+        sendRequest()
+
+        async function insertStudent(body) {
+            const url = 'http://localhost:8080/students'
+            console.log('请求地址：', url)
+            console.log('请求载荷：', body)
+
+            const data = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            }).then(function getRequestFromAPI(response) {
+                return response.json()
+            })
+            return data
+        }
+
+        async function handleSubmit() {
+            console.log('点击了提交按钮')
+            const formData = new FormData(form1)
+            const requestData = Object.fromEntries(formData)
+            console.log('表单输入数据：', requestData)
+
+            if (!requestData.name || !requestData.name.trim()) {
+                alert("姓名没有输入，无法提交")
+                return
+            } else {
+                requestData.name = requestData.name.trim()
+            }
+            if (!requestData.gender || !requestData.gender.trim()) {
+                alert("性别没有输入，无法提交")
+                return
+            } else {
+                requestData.gender = requestData.gender.trim()
+            }
+
+            const responseData = await insertStudent(requestData)
+            console.log('请求返回值：', responseData)
+            table.innerHTML = ''
+            addRow(responseData)
+
+            form1.reset()
+        }
+
+        async function deleteStudent(id) {
+            const url = 'http://localhost:8080/student/' + id
+            console.log('请求地址：', url)
+
+            const data = await fetch(url, {
+                method: 'DELETE',
+            }).then(function getRequestFromAPI(response) {
+                return response.json()
+            })
+            return data
+        }
+
+        async function handleDelete(id) {
+            console.log('点击了删除按钮, id:', id)
+            await deleteStudent(id)
+            await sendRequest()
+        }
+
+        function clickUpdate(id, name, gender, classId) {
+            form2.id.value = id
+            form2.name.value = name
+            form2.gender.value = gender
+            form2.classId.value = classId
+            console.log('更新数据：', { id, name, gender, classId })
+        }
+
+        async function updateStudent(id, body) {
+            const url = 'http://localhost:8080/student/' + id
+            console.log('请求地址：', url)
+            console.log('请求载荷：', body)
+
+            const data = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            }).then(function getRequestFromAPI(response) {
+                return response.json()
+            })
+            return data
+        }
+
+        async function handleUpdate() {
+            console.log('点击了提交按钮')
+            const formData = new FormData(form2)
+            const requestData = Object.fromEntries(formData)
+            console.log('表单输入数据：', requestData)
+
+            if (!requestData.name || !requestData.name.trim()) {
+                alert("姓名没有输入，无法提交")
+                return
+            } else {
+                requestData.name = requestData.name.trim()
+            }
+            if (!requestData.gender || !requestData.gender.trim()) {
+                alert("性别没有输入，无法提交")
+                return
+            } else {
+                requestData.gender = requestData.gender.trim()
+            }
+
+            const responseData = await updateStudent(requestData.id, {
+                name: requestData.name,
+                gender: requestData.gender,
+                classId: requestData.classId,
+            })
+            console.log('请求返回值：', responseData)
+            table.innerHTML = ''
+            addRow(responseData)
+
+            form2.reset()
+        }</script>
 </body>
 
 </html>
