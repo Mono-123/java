@@ -12,6 +12,10 @@
             border-collapse: collapse;
             background-color: hsl(0, 0%, 100%);
             display: inline-block;
+            text-align: center;
+            position: fixed;
+            top: 100px;
+            right: 150px;
         }
 
         td,
@@ -25,11 +29,81 @@
         }
 
         form {
+            width: 500px;
             border: 1px solid rgb(0, 0, 0);
             padding: 0px 10px 10px;
             margin: 10px;
-            display: inline-block;
             vertical-align: top;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        input[type=button],
+        input[type=reset] {
+            background-color: #3c3c3c;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        input[type=button]:hover,
+        input[type=reset]:hover {
+            background-color: #a3a3a3;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: 6px;
+        }
+
+        /* 清除浮动 */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* 响应式布局 layout - 在屏幕宽度小于 600px 时， 设置为上下堆叠元素 */
+        @media screen and (max-width: 500px) {
+            .col-25,
+            .col-75,
+            input[type=submit] {
+                width: 100%;
+                margin-top: 0;
+            }
         }
     </style>
 </head>
@@ -52,11 +126,12 @@
     <button onclick="sendSelect()">查询</button>
     <br>
     <br>
-
+    
+<div class="container">
     <form name="gradeform1" onsubmit="return false;">
-        <h2>创建</h2>
+        <h4>创建</h4>
         <p>
-            年级: 
+            年级:
             <select name="grade">
                 <option value="1">一年级</option>
                 <option value="2">二年级</option>
@@ -65,11 +140,11 @@
             </select>
         </p>
         <p>
-                班主任ID: 
-                <input name="managerId" type="number" />
+            班主任ID:
+            <input name="managerId" type="number" />
         </p>
         <p>
-            
+
             毕业情况:
             未毕业 <input name="isGraduated" type="radio" value="0">
             已毕业 <input name="isGraduated" type="radio" value="1">
@@ -80,13 +155,13 @@
     </form>
 
     <form name="gradeform2" onsubmit="return false;">
-        <h2>更新</h2>
+        <h4>更新</h4>
         <p>
             Id:
             <input name="id" readonly="true" />
         </p>
         <p>
-            年级: 
+            年级:
             <select name="grade">
                 <option value="1">一年级</option>
                 <option value="2">二年级</option>
@@ -95,11 +170,11 @@
             </select>
         </p>
         <p>
-                班主任ID: 
-                <input name="managerId" type="number" />
+            班主任ID:
+            <input name="managerId" type="number" />
         </p>
         <p>
-            
+
             毕业情况:
             未毕业 <input name="isGraduated" type="radio" value="0">
             已毕业 <input name="isGraduated" type="radio" value="1">
