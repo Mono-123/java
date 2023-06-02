@@ -1,42 +1,69 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spring boot</title>
-</head> 
+</head>
+<style>
+    body {
+        margin: 0;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 20%;
+        background-color: #f1f1f1;
+        position: fixed;
+        height: 100%;
+        overflow: auto;
+    }
+
+    li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    li a.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #555;
+        color: white;
+    }
+</style>
+
 <body>
-    <h1>Home Page</h1>
     <ul>
-        <li>
-            <a href="pages/students.htm">Students</a>
-        </li>
-    </ul>
-    <ul>
+        <li><a class="active">Home Page</a></li>
         <li>
             <a href="pages/classes.htm">Classes</a>
         </li>
-    </ul>
-    <ul>
-        <li>
-            <a href="pages/student.htm">Student</a>
-        </li>
-    </ul>
-    <ul>
-        <li>
-            <a href="pages/score.htm">Score</a>
-        </li>
-    </ul>
-    <ul>
-        <li>
-            <a href="pages/teacher.htm">Teacher</a>
-        </li>
-    </ul>
-    <ul>
         <li>
             <a href="pages/grade.htm">Grade</a>
         </li>
+        <li>
+            <a href="pages/score.htm">Score</a>
+        </li>
+        <li>
+            <a href="pages/students.htm">Students</a>
+        </li>
+        <li>
+            <a href="pages/student.htm">Student</a>
+        </li>
+        <li>
+            <a href="pages/teacher.htm">Teacher</a>
+        </li>
+        
     </ul>
 </body>
+
 </html>
