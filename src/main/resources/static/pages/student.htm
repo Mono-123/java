@@ -7,14 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student</title>
     <style>
+        /* 头部样式 */
+        .header {
+            background-color: #f1f1f1;
+            padding: 1px;
+            text-align: center;
+        }
+
         table {
             border: 1px solid black;
             border-collapse: collapse;
             background-color: hsl(0, 0%, 100%);
             display: inline-block;
+            text-align: center;
+            position: relative;
+            bottom: 180px;
+            left: 50px;
         }
 
-        body td,
+        td,
         th {
             border: 1px black solid;
             padding: 10px 25px
@@ -24,6 +35,27 @@
             background-color: lightgray;
         }
 
+        body {
+            background-image: url('background.png');
+        }
+
+        /* 下划线 */
+        a:link {color:#000000;}      /* 未访问链接*/
+        a:visited {color:#025c02;}  /* 已访问链接 */
+        a:hover {color:#5d0000;}  /* 鼠标移动到链接上 */
+        a:active {color:#000072;}  /* 鼠标点击时 */
+        a:link {text-decoration:none;}
+        a:visited {text-decoration:none;}
+        a:hover {text-decoration:underline;}
+        a:active {text-decoration:underline;}
+
+        /* p.background {
+            background-color: #82aec1;
+        }
+        p.date {
+            text-align: right;
+        } */
+
         form {
             border: 1px solid rgb(0, 0, 0);
             padding: 0px 10px 10px;
@@ -31,13 +63,91 @@
             display: inline-block;
             vertical-align: top;
         }
+
+        input {
+            display: inline-block;
+            margin-bottom: 10px;
+            background-color: rgb(255, 255, 255);
+            text-align: right;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        input:focus {
+            background-color: lightblue;
+        }
+
+        input[type=button],
+        input[type=reset] {
+            background-color: #3c3c3c;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        input[type=button]:hover,
+        input[type=reset]:hover {
+            background-color: #a3a3a3;
+        }
+
+        select {
+            width: 80%;
+            border: none;
+            border-radius: 4px;
+            background-color: #ffffff;
+        }
+
+        /* 加入提示 */
+        /* Tooltip 容器 */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+            /* 悬停元素上显示点线 */
+        }
+
+        /* Tooltip 文本 */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            top: -5px;
+            left: 110%;
+        }
+
+        /* 鼠标移动上去后显示提示框 */
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent black transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Student</h1>
-    <p>
+    <div class="header">
+        <h1>Student</h1>
+    </div>
+    <p class="tooltip">
         <a href="/index.htm">Home Page</a>
+        <span class="tooltiptext">加个提示看看</span>
     </p>
 
     <h4>分页查询</h4>
@@ -48,23 +158,24 @@
     </p>
 
     <h4>按学生id查询</h4>
-    请输入需要查找的学生id: <input id="id" type="number" />
+    <p>
+        请输入需要查找的学生id: <input id="id" type="number" />
+    </p>
     <button onclick="sendSelect()">查询</button>
     <br>
     <br>
 
     <form name="studentform1" onsubmit="return false;">
-        <h2>创建</h2>
-        <p>
-            姓名:
-            <input name="name" />
+        <h4>创建</h4>
+        <p class="background">
+            姓名: <input name="name" />
         </p>
-        <p>
+        <p class="background">
             性别:
             女 <input name="gender" type="radio" value="0">
             男 <input name="gender" type="radio" value="1">
         </p>
-        <p>
+        <p class="background">
             班级:
             <select name="classId">
                 <option value="1">一班</option>
@@ -78,13 +189,13 @@
     </form>
 
     <form name="studentform2" onsubmit="return false;">
-        <h2>更新</h2>
-        <p>
+        <h4>更新</h4>
+        <p class="date">
             Id:
             <input name="id" readonly="true" />
         </p>
         <p>
-            名称:
+            姓名:
             <input name="name" />
         </p>
         <p>
@@ -109,7 +220,7 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>名称</th>
+                <th>姓名</th>
                 <th>性别</th>
                 <th>班级</th>
                 <th>操作</th>
