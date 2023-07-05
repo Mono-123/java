@@ -27,8 +27,9 @@ public class StudentController {
     @GetMapping("/list")
     public List<Student> getAll(
             @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
-            @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
-        List<Student> students = this.studentService.getAll(limit, offset);
+            @RequestParam(name = "offset", required = false, defaultValue = "0") int offset,
+            @RequestParam(name = "order", required = false, defaultValue = "id") String order) {
+        List<Student> students = this.studentService.getAll(limit, offset, order);
         return students;
     }
 
@@ -45,26 +46,23 @@ public class StudentController {
 
     @PutMapping("/{id}")
     public Student updateById(
-        @PathVariable(name = "id") int id,
-        @RequestBody Student student
-    ) throws NotFoundException {
+            @PathVariable(name = "id") int id,
+            @RequestBody Student student) throws NotFoundException {
         student.setId(id);
         return this.studentService.updateStudent(student);
     }
 
     @PatchMapping("/{id}")
     public Student patchById(
-        @PathVariable(name = "id") int id,
-        @RequestBody Student student
-    ) throws NotFoundException {
+            @PathVariable(name = "id") int id,
+            @RequestBody Student student) throws NotFoundException {
         student.setId(id);
         return this.studentService.patchStudent(student);
     }
 
     @DeleteMapping("/{id}")
     public boolean deleteById(
-        @PathVariable(name = "id") long id
-    ) throws NotFoundException {
+            @PathVariable(name = "id") long id) throws NotFoundException {
         return this.studentService.deleteStudent(id);
     }
 }

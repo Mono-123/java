@@ -15,7 +15,7 @@
     </select>
 
     <select id="getClassesPagination" resultMap="classesMap">
-        SELECT * FROM classes LIMIT #{limit} OFFSET #{offset}
+        SELECT * FROM classes LIMIT #{limit} OFFSET #{offset} 
     </select>
 
     <insert

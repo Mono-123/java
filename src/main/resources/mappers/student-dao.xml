@@ -7,7 +7,7 @@
     </select>
 
     <select id="getAll" resultType="com.aliyun.learnjava.entity.Student">
-        SELECT * FROM students LIMIT #{limit} OFFSET #{offset}
+        SELECT * FROM students ORDER BY #{order} LIMIT #{limit} OFFSET #{offset}
     </select>
 
     <insert

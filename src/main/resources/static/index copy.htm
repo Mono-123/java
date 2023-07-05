@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+</head>
+
+<body>
+    输入你的名字: <input type="text" id="fname">
+    <p>当你离开输入框后，函数将被触发，将小写字母转为大写字母。</p>
+    <p id="b">用户输入了：</p>
+    <p id="a"></p>
+</body>
+<script>
+    const b = document.getElementById('b');
+    b.addEventListener("mouseover",
+        function () {
+            const a = document.getElementById('a');
+            var x = document.getElementById("fname");
+            a.innerHTML = x.value;
+        }
+    );
+</script>
+
+</html>
