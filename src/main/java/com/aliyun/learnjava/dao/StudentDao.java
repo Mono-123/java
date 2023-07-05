@@ -8,7 +8,7 @@ import com.aliyun.learnjava.entity.Student;
 public interface StudentDao {
     Student getById(@Param("id") long id);
     
-    List<Student> getAll(@Param("limit") int limit, @Param("offset") int offset,@Param("order") String order);
+    List<Student> getAll(@Param("order") String order,@Param("limit") int limit, @Param("offset") int offset);
 
     void insert(@Param("stu") Student student);
 

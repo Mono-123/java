@@ -10,7 +10,7 @@ public interface ScoreDao {
 
     Score getScore(@Param("id") long id);
 
-    List<Score> getScorePagination(@Param("limit") int limit, @Param("offset") int offset,@Param("order") String order);
+    List<Score> getScorePagination(@Param("order") String order,@Param("limit") int limit, @Param("offset") int offset);
 
     void insertScore(@Param("score") Score score);
 

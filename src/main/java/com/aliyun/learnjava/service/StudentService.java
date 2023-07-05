@@ -22,8 +22,8 @@ public class StudentService {
         return student;
     }
 
-    public List<Student> getAll(Integer limit, Integer offset,String order) {
-        return this.studentDao.getAll(limit, offset,order);
+    public List<Student> getAll(String order,Integer limit, Integer offset) {
+        return this.studentDao.getAll(order,limit, offset);
     }
 
     public Student inserStudent(

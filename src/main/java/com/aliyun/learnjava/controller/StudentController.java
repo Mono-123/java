@@ -26,10 +26,10 @@ public class StudentController {
 
     @GetMapping("/list")
     public List<Student> getAll(
+            @RequestParam(name = "order", required = false, defaultValue = "score") String order,
             @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
-            @RequestParam(name = "offset", required = false, defaultValue = "0") int offset,
-            @RequestParam(name = "order", required = false, defaultValue = "id") String order) {
-        List<Student> students = this.studentService.getAll(limit, offset, order);
+            @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
+        List<Student> students = this.studentService.getAll(order,limit, offset);
         return students;
     }
 
