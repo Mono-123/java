@@ -27,9 +27,30 @@ public class StudentController {
     @GetMapping("/list")
     public List<Student> getAll(
             @RequestParam(name = "order", required = false, defaultValue = "score") String order,
+            @RequestParam(name = "desc", required = false, defaultValue = "0") int desc,
             @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
             @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
-        List<Student> students = this.studentService.getAll(order,limit, offset);
+        List<Student> students = this.studentService.getAll(order,desc, limit, offset);
+        return students;
+    }
+
+    @GetMapping("/{condition}/{query}")
+    public List<Student> getBy(
+            @PathVariable("condition") String condition,
+            @PathVariable("query") String query) throws NotFoundException {
+        System.out.println("condition: " + condition + "query: " + query);
+        List<Student> students = this.studentService.getBy(condition, query);
+        return students;
+    }
+
+    @GetMapping("/condition")
+    public List<Student> getCondition(
+            @RequestParam(name = "name" ,required = false) String name,
+            @RequestParam(name = "gender" ,required = false) String gender,
+            @RequestParam(name = "grade" ,required = false) String grade,
+            @RequestParam(name = "score" ,required = false) String score) throws NotFoundException {
+        System.out.println("name: " + name + "gender: " + gender + "grade: " + grade + "score: " + score);
+        List<Student> students = this.studentService.getCondition(name, gender,grade,score);
         return students;
     }
 

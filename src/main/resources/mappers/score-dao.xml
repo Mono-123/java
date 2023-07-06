@@ -15,7 +15,11 @@
     </select>
 
     <select id="getScorePagination" resultMap="scoreMap">
-        SELECT * FROM score ORDER BY #{order} LIMIT #{limit} OFFSET #{offset} 
+        SELECT * FROM score ORDER BY ${order} 
+        <if test = " desc != 0 ">
+		     DESC
+		</if>
+        LIMIT #{limit} OFFSET #{offset}
     </select>
 
     <insert

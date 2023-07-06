@@ -26,10 +26,12 @@ public class ScoreController {
 
     @GetMapping("/list")
     public List<Score> getScorePagination(
-        @RequestParam(name = "order", required = false, defaultValue = "chinese") String order,
+        @RequestParam(name = "order", required = false, defaultValue = "id") String order,
+        @RequestParam(name = "desc", required = false, defaultValue = "0") int desc,
         @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
         @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
-        List<Score> score = this.scoreService.getScorePagination(order,limit, offset);
+        System.out.println("order: " + order);
+        List<Score> score = this.scoreService.getScorePagination(order,desc,limit, offset);
         return score;
     }
 

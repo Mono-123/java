@@ -22,16 +22,32 @@ public class StudentService {
         return student;
     }
 
-    public List<Student> getAll(String order,Integer limit, Integer offset) {
-        return this.studentDao.getAll(order,limit, offset);
+    public List<Student> getBy(String condition, String query) throws NotFoundException {
+        List<Student> student = studentDao.getBy(condition, query);
+        if (student == null) {
+            throw new NotFoundException(condition + ":" + query + " in student table not found");
+        }
+        return student;
+    }
+
+    public List<Student> getCondition(String name, String gender, String grade, String score) throws NotFoundException {
+        List<Student> student = studentDao.getCondition(name, gender, grade, score);
+        if (student == null) {
+            throw new NotFoundException("name: " + name + "gender: " + gender + "grade: " + grade + "score: " + score
+                    + " in student table not found");
+        }
+        return student;
+    }
+
+    public List<Student> getAll(String order, int desc,Integer limit, Integer offset) {
+        return this.studentDao.getAll(order,desc, limit, offset);
     }
 
     public Student inserStudent(
-        String name,
-        Integer gender,
-        Integer grade,
-        Integer score
-    ) {
+            String name,
+            Integer gender,
+            Integer grade,
+            Integer score) {
         Student stu = new Student();
         stu.setName(name);
         stu.setGender(gender);
@@ -61,13 +77,13 @@ public class StudentService {
             if (input.getName() != null && !input.getName().isEmpty()) {
                 student.setName(input.getName());
             }
-            if (input.getGender() == null ) {
+            if (input.getGender() == null) {
                 student.setGender(input.getGender());
             }
-            if (input.getGrade() == null ) {
+            if (input.getGrade() == null) {
                 student.setGrade(input.getGrade());
             }
-            if (input.getScore() == null ) {
+            if (input.getScore() == null) {
                 student.setScore(input.getScore());
             }
             return this.updateStudent(student);

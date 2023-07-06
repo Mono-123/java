@@ -22,8 +22,8 @@ public class ScoreService {
         return scoreDao.getScore(id);
     }
 
-    public List<Score> getScorePagination(String order,int limit, int offset) {
-        return this.scoreDao.getScorePagination( order,limit, offset);
+    public List<Score> getScorePagination(String order,int desc,int limit, int offset) {
+        return this.scoreDao.getScorePagination( order,desc,limit, offset);
     }
     
     public Score inserScore(

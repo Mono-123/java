@@ -6,8 +6,41 @@
         SELECT * FROM students WHERE id = #{id}
     </select>
 
+    <select id="getBy" resultType="com.aliyun.learnjava.entity.Student">
+        SELECT * FROM students 
+        <choose>
+            <when test="condition == 'name'">
+                WHERE name LIKE '%${query}%'
+            </when>
+            <otherwise>
+                WHERE ${condition} = #{query}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getCondition" resultType="com.aliyun.learnjava.entity.Student">
+        SELECT * FROM students WHERE score &gt;= 0
+        <if test = " name != null ">
+		     AND name LIKE '%${name}%'
+		</if>
+        <if test = " gender != null ">
+		     AND gender = #{gender}
+		</if>
+        <if test = " grade != null ">
+		     AND grade = #{grade}
+		</if>
+        <if test = " score != null ">
+		     AND score = #{score}
+		</if>
+    </select>
+
+
     <select id="getAll" resultType="com.aliyun.learnjava.entity.Student">
-        SELECT * FROM students ORDER BY #{order} LIMIT #{limit} OFFSET #{offset}
+        SELECT * FROM students ORDER BY ${order} 
+        <if test = " desc != 0 ">
+		     DESC
+		</if>
+        LIMIT #{limit} OFFSET #{offset}
     </select>
 
     <insert
