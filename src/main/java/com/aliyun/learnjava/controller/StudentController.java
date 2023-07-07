@@ -59,7 +59,9 @@ public class StudentController {
 
 
     @PostMapping("/upload")
-    public String upload(@RequestParam("file") MultipartFile file, @RequestParam("name") String name)
+    public String upload(
+        @RequestParam("file") MultipartFile file, 
+        @RequestParam(name = "name", required = false) String name)
             throws Exception {
         // 设置上传至项目文件夹下的uploadFile文件夹中，没有文件夹则创建
         System.out.println("upload: " + file);
