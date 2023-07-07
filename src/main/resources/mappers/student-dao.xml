@@ -49,14 +49,14 @@
         useGeneratedKeys="true"
         keyProperty="id"
     >
-        INSERT INTO students (name, gender, grade, score) VALUES (#{stu.name}, #{stu.gender}, #{stu.grade}, #{stu.score})
+        INSERT INTO students (name, gender, grade, score,img) VALUES (#{stu.name}, #{stu.gender}, #{stu.grade}, #{stu.score}, #{stu.img})
     </insert>
 
     <update
         id="updateById"
         parameterType="com.aliyun.learnjava.entity.Student"
     >
-        UPDATE students SET name = #{stu.name}, gender = #{stu.gender}, grade = #{stu.grade}, score = #{stu.score} WHERE id = #{stu.id}
+        UPDATE students SET name = #{stu.name}, gender = #{stu.gender}, grade = #{stu.grade}, score = #{stu.score}, img = #{stu.img} WHERE id = #{stu.id}
     </update>
 
     <delete

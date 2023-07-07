@@ -2,6 +2,7 @@ package com.aliyun.learnjava.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aliyun.learnjava.service.StudentService;
-
+import com.aliyun.learnjava.util.ListResponse;
 import com.aliyun.exception.NotFoundException;
 import com.aliyun.learnjava.entity.Student;
 
@@ -27,61 +28,39 @@ import com.aliyun.learnjava.entity.Student;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-    // // 上传路径
-    // @Value("${document.uploadPath}")
-    // private String uploadPath;
-
-    // // 显示路径
-    // @Value("${document.imgPath}")
-    // private String imgPath;
-
-// @RequestMapping("/upload")
-// public class UploadController {
- 
-//     @PostMapping
-//     public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
-//         // file:上传文件
-//         // 获取到 images 的具体路径
-//         // String realPath = request.getRealPath("images");
-//         String realPath = ResourceUtils.getURL("classpath:").getPath() + "/static/images";
-//         System.out.println("上传的文件地址是：" + realPath);
-//         // 服务器中对应的位置
-//         // 产生唯一的文件名称
-//         String fileName = UUID.getUUid();
-//         // 获取到文件后缀
-//         String fileType = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-//         File src = new File(realPath, fileName + fileType);
-//         // 将file文件传递到src去
-//         file.transferTo(src);
-//         return "images/" + fileName + fileType;
-//     }
-// }
-
 
     @PostMapping("/upload")
     public String upload(
-        @RequestParam("file") MultipartFile file, 
-        @RequestParam(name = "name", required = false) String name)
+            @RequestParam("file") MultipartFile file)
             throws Exception {
         // 设置上传至项目文件夹下的uploadFile文件夹中，没有文件夹则创建
-        System.out.println("upload: " + file);
+        UUID uuid = UUID.randomUUID();
+        String name = uuid.toString();
+        System.out.println("upload: " + name);
         File dir = new File("uploadFile");
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        file.transferTo(new File(dir.getAbsolutePath() + File.separator + name + ".png"));
-        return "上传完成！文件名：" + name;
+        String fileName = file.getOriginalFilename();
+        String fileSuffix = fileName.substring(fileName.lastIndexOf("."));
+        System.out.println("fileName: " + fileName + "fileSuffix: " + fileSuffix);
+        file.transferTo(new File(dir.getAbsolutePath() + File.separator + name + fileSuffix));
+        return name + fileSuffix;
     }
 
 
     @GetMapping("/list")
-    public List<Student> getAll(
+    public ListResponse<Student> getAll(
             @RequestParam(name = "order", required = false, defaultValue = "score") String order,
             @RequestParam(name = "desc", required = false, defaultValue = "0") int desc,
             @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
             @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
         List<Student> students = this.studentService.getAll(order, desc, limit, offset);
-        return students;
+        long total=0;
+        ListResponse<Student> resp = new ListResponse<Student>(total,students);
+        // resp.setList(students);
+        // resp.setTotal(total);
+        return  resp;
     }
 
     @GetMapping("/{condition}/{query}")

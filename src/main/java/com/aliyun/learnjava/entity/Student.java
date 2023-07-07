@@ -6,6 +6,7 @@ public class Student {
     private Integer gender;
     private Integer grade;
     private Integer score;
+    private String img;
 
     public void setId(long id) {
         this.id = id;
@@ -29,6 +30,14 @@ public class Student {
 
     public long getId() {
         return id;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getName() {
@@ -60,6 +69,9 @@ public class Student {
         sb.append(this.gender);
         sb.append(", score: ");
         sb.append(this.score);
+        sb.append(", img: ");
+        sb.append(this.img);
         return sb.toString();
     }
+
 }

@@ -25,6 +25,8 @@ public class Application {
                 // 映射路径`/static/`到classpath路径:
                 registry.addResourceHandler("/static/**")
                         .addResourceLocations("classpath:/static/");
+                registry.addResourceHandler("/uploadFile/**")
+                        .addResourceLocations("file:D:\\workspace\\java\\uploadFile\\");
             }
         };
     }

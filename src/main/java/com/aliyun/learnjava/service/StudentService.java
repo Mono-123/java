@@ -47,12 +47,14 @@ public class StudentService {
             String name,
             Integer gender,
             Integer grade,
-            Integer score) {
+            Integer score,
+            String img) {
         Student stu = new Student();
         stu.setName(name);
         stu.setGender(gender);
         stu.setGrade(grade);
         stu.setScore(score);
+        stu.setImg(img);
         this.studentDao.insert(stu);
         return stu;
     }
