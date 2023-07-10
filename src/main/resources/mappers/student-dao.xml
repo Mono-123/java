@@ -34,19 +34,23 @@
 		</if>
     </select>
 
+<resultMap id="StudentResult" type="com.aliyun.learnjava.entity.Student">
+</resultMap>
+<resultMap id="count" type="java.lang.Integer">
+</resultMap>
 
-    <select id="getAll" resultType="com.aliyun.learnjava.util.ListResponse">
-        SELECT count(*) FROM students ORDER BY ${order} 
+    <select id="getAll" resultMap="StudentResult,count">
+        SELECT * FROM students 
+         <if test = " gender != null ">
+		    WHERE gender = #{gender}
+		</if>
+            ORDER BY ${order} 
         <if test = " desc != 0 ">
-		     DESC
+		    DESC
 		</if>
         LIMIT #{limit} OFFSET #{offset};
-        
-        SELECT * FROM students ORDER BY ${order} 
-        <if test = " desc != 0 ">
-		     DESC
-		</if>
-        LIMIT #{limit} OFFSET #{offset};
+
+        SELECT count(*) FROM students LIMIT #{limit} OFFSET #{offset};
     </select>
 
     <insert

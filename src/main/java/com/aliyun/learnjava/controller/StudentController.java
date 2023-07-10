@@ -48,17 +48,20 @@ public class StudentController {
     }
 
     @GetMapping("/list")
-    public ListResponse<Student> getAll(
-            @RequestParam(name = "order", required = false, defaultValue = "score") String order,
+    public List<List<Student>> getAll(
+            @RequestParam(name = "gender", required = false) String gender,
+            @RequestParam(name = "order", required = false, defaultValue = "id") String order,
             @RequestParam(name = "desc", required = false, defaultValue = "0") int desc,
             @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
             @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
-        List<Student> students = this.studentService.getAll(order, desc, limit, offset);
-        long total=0;
-        ListResponse<Student> resp = new ListResponse<Student>(total,students);
+        List<List<Student>> result = this.studentService.getAll(gender,order, desc, limit, offset);
+        System.out.println("result: " + result + "list: " +(List<Student>) result.get(0)+ "total: "+ result.get(1).get(0));
+        // List<Student> list = (List<Student>) result.get(0);
+        // Integer total= result.get(1).get(0);
+        // ListResponse<Student> resp = new ListResponse<Student>(total,list);
         // resp.setList(students);
         // resp.setTotal(total);
-        return resp;
+        return result;
     }
 
     @GetMapping("/{condition}/{query}")

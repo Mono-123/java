@@ -38,8 +38,8 @@ public class StudentService {
         return student;
     }
 
-    public List<Student> getAll(String order, int desc, Integer limit, Integer offset) {
-        return this.studentDao.getAll(order, desc, limit, offset);
+    public List<List<Student>> getAll(String gender,String order, int desc, Integer limit, Integer offset) {
+        return this.studentDao.getAll(gender,order, desc, limit, offset);
     }
 
     public Student inserStudent(
