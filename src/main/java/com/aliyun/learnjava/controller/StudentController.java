@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aliyun.learnjava.service.StudentService;
 import com.aliyun.learnjava.util.ListResponse;
@@ -48,7 +47,6 @@ public class StudentController {
         return name + fileSuffix;
     }
 
-
     @GetMapping("/list")
     public ListResponse<Student> getAll(
             @RequestParam(name = "order", required = false, defaultValue = "score") String order,
@@ -60,7 +58,7 @@ public class StudentController {
         ListResponse<Student> resp = new ListResponse<Student>(total,students);
         // resp.setList(students);
         // resp.setTotal(total);
-        return  resp;
+        return resp;
     }
 
     @GetMapping("/{condition}/{query}")

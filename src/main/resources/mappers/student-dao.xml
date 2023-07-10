@@ -35,12 +35,18 @@
     </select>
 
 
-    <select id="getAll" resultType="com.aliyun.learnjava.entity.Student">
+    <select id="getAll" resultType="com.aliyun.learnjava.util.ListResponse">
+        SELECT count(*) FROM students ORDER BY ${order} 
+        <if test = " desc != 0 ">
+		     DESC
+		</if>
+        LIMIT #{limit} OFFSET #{offset};
+        
         SELECT * FROM students ORDER BY ${order} 
         <if test = " desc != 0 ">
 		     DESC
 		</if>
-        LIMIT #{limit} OFFSET #{offset}
+        LIMIT #{limit} OFFSET #{offset};
     </select>
 
     <insert
