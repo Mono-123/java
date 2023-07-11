@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aliyun.learnjava.service.StudentService;
+import com.aliyun.learnjava.util.ListResponse;
 import com.aliyun.exception.NotFoundException;
 import com.aliyun.learnjava.entity.Student;
 
@@ -47,20 +48,21 @@ public class StudentController {
     }
 
     @GetMapping("/list")
-    public List<List<Student>> getAll(
+    public ListResponse<Student> getAll(
             @RequestParam(name = "gender", required = false) String gender,
             @RequestParam(name = "order", required = false, defaultValue = "id") String order,
             @RequestParam(name = "desc", required = false, defaultValue = "0") int desc,
             @RequestParam(name = "limit", required = false, defaultValue = "10") int limit,
             @RequestParam(name = "offset", required = false, defaultValue = "0") int offset) {
-        List<List<Student>> result = this.studentService.getAll(gender,order, desc, limit, offset);
+        List<Student> list = this.studentService.getAll(gender,order, desc, limit, offset);
         // System.out.println("result: " + result + "list: " +(List<Student>) result.get(0)+ "total: "+ result.get(1).get(0));
         // List<Student> list = (List<Student>) result.get(0);
-        // Integer total= result.get(1).get(0);
-        // ListResponse<Student> resp = new ListResponse<Student>(total,list);
-        // resp.setList(students);
+        Integer total= this.studentService.getTotal();
+        ListResponse<Student> resp = new ListResponse<Student>(total,list);
+        // ListResponse<Student> resp=new ListResponse<Student>();
+        // resp.setList(list);
         // resp.setTotal(total);
-        return result;
+        return resp;
     }
 
     @GetMapping("/{condition}/{query}")

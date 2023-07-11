@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.aliyun.exception.NotFoundException;
 import com.aliyun.learnjava.dao.StudentDao;
 import com.aliyun.learnjava.entity.Student;
+
 @Service
 public class StudentService {
     @Autowired
@@ -38,8 +39,12 @@ public class StudentService {
         return student;
     }
 
-    public List<List<Student>> getAll(String gender,String order, int desc, Integer limit, Integer offset) {
-        return this.studentDao.getAll(gender,order, desc, limit, offset);
+    public List<Student> getAll(String gender, String order, int desc, Integer limit, Integer offset) {
+        return this.studentDao.getAll(gender, order, desc, limit, offset);
+    }
+
+    public Integer getTotal() {
+        return this.studentDao.getTotal();
     }
 
     public Student inserStudent(

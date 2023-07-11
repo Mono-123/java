@@ -39,7 +39,7 @@
 <resultMap id="count" type="java.lang.Integer">
 </resultMap>
 
-    <select id="getAll" resultMap="StudentResult,count">
+    <select id="getAll" resultType="com.aliyun.learnjava.entity.Student">
         SELECT * FROM students 
          <if test = " gender != null ">
 		    WHERE gender = #{gender}
@@ -49,8 +49,10 @@
 		    DESC
 		</if>
         LIMIT #{limit} OFFSET #{offset};
+    </select>
 
-        SELECT count(*) FROM students LIMIT #{limit} OFFSET #{offset};
+    <select id="getTotal" resultType="Integer">
+        SELECT count(*) FROM students;
     </select>
 
     <insert

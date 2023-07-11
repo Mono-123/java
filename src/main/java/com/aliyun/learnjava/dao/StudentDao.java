@@ -11,9 +11,11 @@ public interface StudentDao {
 
         List<Student> getBy(@Param("condition") String condition, @Param("query") String query);
 
-        List<List<Student>> getAll(@Param("gender") String gender,
+        List<Student> getAll(@Param("gender") String gender,
                         @Param("order") String order, @Param("desc") int desc,
                         @Param("limit") int limit, @Param("offset") int offset);
+
+        Integer getTotal();
 
         List<Student> getCondition(
                         @Param("name") String name, @Param("gender") String gender,
